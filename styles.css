@@ -919,7 +919,7 @@ h3 {
   .menu.open {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
     padding: 48px 8px 32px;
     gap: 0;
@@ -936,6 +936,7 @@ h3 {
     text-decoration: none;
     padding: 16px 0;
     border-bottom: 1px solid var(--line);
+    text-align: center;
   }
 
   .menu a:first-child {
@@ -958,7 +959,7 @@ h3 {
     text-transform: uppercase;
     letter-spacing: 0.08em;
     text-decoration: none;
-    border: 2px solid var(--ocean-950);
+    border: none;
     text-align: center;
   }
 
