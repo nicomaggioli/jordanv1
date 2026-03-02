@@ -840,7 +840,7 @@ h3 {
 }
 
 @media (max-width: 767px) {
-  /* ---- Header bar (default state) ---- */
+  /* ---- Header bar ---- */
   .site-header {
     display: flex;
     align-items: center;
@@ -854,20 +854,16 @@ h3 {
     -webkit-backdrop-filter: none;
   }
 
-  /* ---- Header becomes fullscreen overlay when menu is open ---- */
+  /* When menu is open, header becomes the fullscreen panel */
   .site-header:has(.menu.open) {
     position: fixed;
     inset: 0;
     flex-wrap: wrap;
     align-items: flex-start;
     align-content: flex-start;
-    background: var(--ocean-950);
+    background: rgba(255, 255, 255, 0.97);
     border-color: transparent;
     padding: 10px 16px;
-  }
-
-  .site-header:has(.menu.open) .brand-logo {
-    filter: brightness(10);
   }
 
   .desktop-only {
@@ -880,10 +876,10 @@ h3 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     background: none;
-    border: 2px solid var(--line);
+    border: none;
     cursor: pointer;
     padding: 0;
     gap: 5px;
@@ -894,20 +890,11 @@ h3 {
 
   .hamburger span {
     display: block;
-    width: 20px;
+    width: 22px;
     height: 2px;
     background: var(--ocean-950);
-    border-radius: 1px;
     transition: transform 0.3s ease, opacity 0.2s ease;
     transform-origin: center;
-  }
-
-  .hamburger.active {
-    border-color: rgba(234, 249, 255, 0.3);
-  }
-
-  .hamburger.active span {
-    background: var(--foam);
   }
 
   .hamburger.active span:nth-child(1) {
@@ -922,64 +909,57 @@ h3 {
     transform: translateY(-7px) rotate(-45deg);
   }
 
-  /* ---- Menu (hidden by default) ---- */
+  /* ---- Nav links (hidden by default) ---- */
   .menu {
     display: none;
     width: 100%;
+    order: 3;
   }
 
   .menu.open {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
+    align-items: flex-start;
     width: 100%;
-    padding: 40px 20px;
+    padding: 48px 8px 32px;
     gap: 0;
   }
 
   .menu a {
     display: block;
     width: 100%;
-    text-align: center;
-    font-family: "Bebas Neue", "Arial Narrow", sans-serif;
-    font-size: 36px;
-    letter-spacing: 0.06em;
-    color: var(--foam);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ocean-750);
     text-decoration: none;
-    padding: 18px 0;
-    border-bottom: 1px solid rgba(234, 249, 255, 0.12);
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
   }
 
-  .menu a:last-of-type {
-    border-bottom: none;
+  .menu a:first-child {
+    border-top: 1px solid var(--line);
   }
 
   .menu a:hover,
   .menu a:active {
-    color: var(--sun);
-    border-bottom-color: transparent;
+    color: var(--ocean-950);
   }
 
-  /* RSVP button inside menu */
   .menu-rsvp {
-    display: inline-block;
-    margin-top: 32px;
-    padding: 14px 48px;
+    display: block;
+    margin-top: 24px;
+    padding: 12px 32px;
     background: var(--sun);
     color: var(--ocean-950);
-    font-family: "Manrope", sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     text-decoration: none;
-    border: 2px solid var(--sun);
-  }
-
-  .menu-rsvp:hover {
-    background: #ff7f35;
+    border: 2px solid var(--ocean-950);
+    text-align: center;
   }
 
   /* ---- Mobile layout overrides ---- */
