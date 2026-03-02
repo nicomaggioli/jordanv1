@@ -1007,6 +1007,12 @@ h3 {
     padding: 8px 12px;
   }
 
+  .board-tag {
+    bottom: auto;
+    top: 14px;
+    right: 14px;
+  }
+
   .section {
     padding: 0;
   }
