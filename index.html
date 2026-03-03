@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jordan 50th Surf Session</title>
     <link rel="icon" type="image/png" href="assets/Jordan_Logo.png" />
-    <link rel="stylesheet" href="styles.css?v=3" />
+    <link rel="stylesheet" href="styles.css?v=4" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
@@ -53,21 +53,6 @@
             carries the wave through the evening.
           </p>
 
-          <div class="hero-stats" aria-label="Event pulse">
-            <article class="stat-card">
-              <p class="stat-label">Days Until Party</p>
-              <p class="stat-value" id="countdown-days">--</p>
-            </article>
-            <article class="stat-card">
-              <p class="stat-label">Session Length</p>
-              <p class="stat-value">5 Hours</p>
-            </article>
-            <article class="stat-card">
-              <p class="stat-label">Dress Code</p>
-              <p class="stat-value">Casual</p>
-            </article>
-          </div>
-
           <div class="fact-grid" aria-label="Key details">
             <article class="fact-item">
               <p class="fact-label">Date</p>
@@ -83,7 +68,6 @@
             </article>
           </div>
 
-          <a class="hero-rsvp-btn" href="mailto:rsvp@sproutstudios.com?subject=Jordan%2050th%20RSVP">RSVP Now</a>
         </div>
 
         <div class="hero-visual">
@@ -104,7 +88,7 @@
             alt="Tropical beach at golden hour"
           />
           <p class="hero-date">Save the Date // June 15, 2026</p>
-          <p class="board-tag">Paddle Out at Sunset</p>
+          <a class="board-tag" href="mailto:rsvp@sproutstudios.com?subject=Jordan%2050th%20RSVP">RSVP</a>
         </div>
       </section>
 
@@ -216,7 +200,6 @@
 
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      const countdownEl = document.getElementById('countdown-days');
       const heroVisualEl = document.querySelector('.hero-visual');
 
       const imageEl = document.getElementById('lodging-image');
@@ -243,14 +226,6 @@
           '.lead, .agenda-copy, .agenda-note, .shore-card p:last-child'
         );
         staticTargets.forEach((el) => setTextNoWidow(el, el.textContent));
-      };
-
-      const updateCountdown = () => {
-        const now = new Date();
-        const eventDate = new Date('2026-06-15T18:00:00-04:00'); // Party starts at 6 PM
-        const diff = eventDate - now;
-        const days = Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
-        countdownEl.textContent = String(days);
       };
 
       const renderHotel = () => {
@@ -321,7 +296,6 @@
       }
 
       applyStaticWidowFix();
-      updateCountdown();
       renderHotel();
       window.setInterval(advanceSlide, 4000);
 
