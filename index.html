@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jordan 50th Surf Session</title>
     <link rel="icon" type="image/png" href="assets/Jordan_Logo.png" />
-    <link rel="stylesheet" href="styles.css?v=2" />
+    <link rel="stylesheet" href="styles.css?v=3" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
@@ -34,7 +34,6 @@
 
         <nav class="menu" id="mainMenu" aria-label="Section navigation">
           <a href="#overview">Overview</a>
-          <a href="#cool-facts">Cool Facts</a>
           <a href="#agenda">Agenda</a>
           <a href="#location">Location</a>
           <a href="#lodging">Lodging</a>
@@ -61,7 +60,7 @@
             </article>
             <article class="stat-card">
               <p class="stat-label">Session Length</p>
-              <p class="stat-value">4.5 Hours</p>
+              <p class="stat-value">5 Hours</p>
             </article>
             <article class="stat-card">
               <p class="stat-label">Dress Code</p>
@@ -76,53 +75,36 @@
             </article>
             <article class="fact-item">
               <p class="fact-label">Time</p>
-              <p class="fact-value">6:00 PM to 10:30 PM</p>
+              <p class="fact-value">6:00 PM to 11:00 PM</p>
             </article>
             <article class="fact-item">
               <p class="fact-label">Venue</p>
               <p class="fact-value">Sprout Studios</p>
             </article>
           </div>
+
+          <a class="hero-rsvp-btn" href="mailto:rsvp@sproutstudios.com?subject=Jordan%2050th%20RSVP">RSVP Now</a>
         </div>
 
         <div class="hero-visual">
-          <img
+          <img class="hero-slide active"
             src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80"
             alt="Ocean wave at sunset"
           />
+          <img class="hero-slide"
+            src="https://images.unsplash.com/photo-1476673160081-cf065607f449?auto=format&fit=crop&w=1600&q=80"
+            alt="Golden sunset over the ocean"
+          />
+          <img class="hero-slide"
+            src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1600&q=80"
+            alt="Waves crashing at sunset"
+          />
+          <img class="hero-slide"
+            src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?auto=format&fit=crop&w=1600&q=80"
+            alt="Tropical beach at golden hour"
+          />
           <p class="hero-date">Save the Date // June 15, 2026</p>
           <p class="board-tag">Paddle Out at Sunset</p>
-        </div>
-      </section>
-
-      <section class="section reveal" id="cool-facts" aria-labelledby="facts-title">
-        <h2 id="facts-title">Cool Facts</h2>
-        <div class="section-panel cool-grid">
-          <article class="cool-card">
-            <p class="cool-label">Commute Style</p>
-            <h3>Rides a Super Cool Red Moped</h3>
-            <p>Jordan rolls in on a red moped ready to conquer the day.</p>
-          </article>
-          <article class="cool-card">
-            <p class="cool-label">Inventor</p>
-            <h3>Has over 30 patents to his name</h3>
-            <p>Ideas that actually made it into the world.</p>
-          </article>
-          <article class="cool-card">
-            <p class="cool-label">Flow State</p>
-            <h3>Loves long bike rides to think</h3>
-            <p>Solves big problems in a flow state.</p>
-          </article>
-          <article class="cool-card">
-            <p class="cool-label">System Thinker</p>
-            <h3>Designs systems, not just products</h3>
-            <p>Applies design thinking to business itself.</p>
-          </article>
-        </div>
-
-        <div class="section-panel report-panel" aria-live="polite">
-          <p class="report-label">Break Report</p>
-          <p class="report-text" id="rotating-fact"></p>
         </div>
       </section>
 
@@ -134,11 +116,11 @@
             <p class="agenda-copy">Guest arrival, welcome drinks, and open conversation.</p>
           </article>
           <article class="agenda-item">
-            <p class="agenda-time">7:00 PM</p>
+            <p class="agenda-time">7:30 PM</p>
             <p class="agenda-copy">Dinner service and short birthday toasts.</p>
           </article>
           <article class="agenda-item">
-            <p class="agenda-time">8:30 PM</p>
+            <p class="agenda-time">9:00 PM</p>
             <p class="agenda-copy">Cake, music, and a dance floor to close the night.</p>
           </article>
           <p class="agenda-note">
@@ -229,17 +211,12 @@
         }
       ];
 
-      const breakFacts = [
-        "Jordan's red moped commute keeps his event stamina elite level by default.",
-        "Mid-June sunsets are around 8:20 PM, right in time for cake and music.",
-        "A good surf session and a good party have the same rule: show up early and stay for the last wave.",
-        "This venue setup is optimized for conversation first, celebration second, and dance floor third."
-      ];
+      const heroSlides = document.querySelectorAll('.hero-slide');
+      let slideIndex = 0;
 
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       const countdownEl = document.getElementById('countdown-days');
-      const factEl = document.getElementById('rotating-fact');
       const heroVisualEl = document.querySelector('.hero-visual');
 
       const imageEl = document.getElementById('lodging-image');
@@ -248,7 +225,6 @@
       const descriptionEl = document.getElementById('lodging-description');
 
       let hotelIndex = 0;
-      let factIndex = 0;
 
       const preventWidow = (text) => {
         const words = text.trim().split(/\s+/);
@@ -264,14 +240,14 @@
 
       const applyStaticWidowFix = () => {
         const staticTargets = document.querySelectorAll(
-          '.lead, .cool-card p:last-child, .agenda-copy, .agenda-note, .shore-card p:last-child'
+          '.lead, .agenda-copy, .agenda-note, .shore-card p:last-child'
         );
         staticTargets.forEach((el) => setTextNoWidow(el, el.textContent));
       };
 
       const updateCountdown = () => {
         const now = new Date();
-        const eventDate = new Date('2026-06-15T18:00:00-04:00');
+        const eventDate = new Date('2026-06-15T18:00:00-04:00'); // Party starts at 6 PM
         const diff = eventDate - now;
         const days = Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
         countdownEl.textContent = String(days);
@@ -291,13 +267,10 @@
         }, prefersReducedMotion ? 0 : 120);
       };
 
-      const renderBreakFact = () => {
-        factEl.classList.remove('is-visible');
-
-        window.setTimeout(() => {
-          setTextNoWidow(factEl, breakFacts[factIndex]);
-          factEl.classList.add('is-visible');
-        }, prefersReducedMotion ? 0 : 120);
+      const advanceSlide = () => {
+        heroSlides[slideIndex].classList.remove('active');
+        slideIndex = (slideIndex + 1) % heroSlides.length;
+        heroSlides[slideIndex].classList.add('active');
       };
 
       document.querySelectorAll('.lodging-panel .arrow-btn').forEach((button) => {
@@ -350,12 +323,7 @@
       applyStaticWidowFix();
       updateCountdown();
       renderHotel();
-      renderBreakFact();
-
-      window.setInterval(() => {
-        factIndex = (factIndex + 1) % breakFacts.length;
-        renderBreakFact();
-      }, prefersReducedMotion ? 12000 : 4600);
+      window.setInterval(advanceSlide, 4000);
 
       // Hamburger Menu - Clean Implementation
       const hamburgerBtn = document.getElementById('hamburgerBtn');

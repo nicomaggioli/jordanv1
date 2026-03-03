@@ -286,6 +286,28 @@ h1 {
   line-height: 1.3;
 }
 
+.hero-rsvp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+  padding: 16px 48px;
+  border: 2px solid var(--ocean-950);
+  background: var(--sun);
+  color: var(--ocean-950);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: background 0.2s ease;
+}
+
+.hero-rsvp-btn:hover,
+.hero-rsvp-btn:focus-visible {
+  background: #ff7f35;
+}
+
 .hero-visual {
   position: relative;
   min-height: 420px;
@@ -293,7 +315,10 @@ h1 {
   border: 2px solid var(--line-strong);
 }
 
-.hero-visual img {
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   min-height: 420px;
@@ -301,6 +326,12 @@ h1 {
   filter: saturate(1.15) contrast(1.05);
   transform: scale(1.03);
   animation: swell 9s ease-in-out infinite;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.hero-slide.active {
+  opacity: 1;
 }
 
 .hero-date {
@@ -632,7 +663,7 @@ h3 {
   }
 
   .hero-visual,
-  .hero-visual img {
+  .hero-slide {
     min-height: 340px;
   }
 
@@ -713,7 +744,7 @@ h3 {
   }
 
   .hero-visual,
-  .hero-visual img {
+  .hero-slide {
     min-height: 280px;
   }
 
@@ -747,6 +778,10 @@ h3 {
   .lodging-card img {
     opacity: 1;
     transform: none;
+  }
+
+  .hero-slide {
+    transition: none;
   }
 
   .hero-visual {
@@ -993,7 +1028,7 @@ h3 {
     margin: 20px 0;
   }
 
-  .hero-visual img {
+  .hero-slide {
     height: 280px;
   }
 
