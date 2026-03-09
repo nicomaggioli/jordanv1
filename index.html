@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jordan 50th Surf Session</title>
     <link rel="icon" type="image/png" href="assets/Jordan_Logo.png" />
-    <link rel="stylesheet" href="styles.css?v=9" />
+    <link rel="stylesheet" href="styles.css?v=10" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
     />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   </head>
   <body>
     <div class="ocean-layers" aria-hidden="true">
@@ -124,254 +126,7 @@
       <section class="section reveal" id="location" aria-labelledby="location-title">
         <h2 id="location-title">Map of OGT</h2>
         <div class="section-panel map-panel">
-          <svg id="ogt-map" viewBox="0 0 960 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustrated map of Ogunquit, Maine">
-            <defs>
-              <!-- Ocean gradient -->
-              <linearGradient id="oceanGrad" x1="0.6" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#b8dff0"/>
-                <stop offset="40%" stop-color="#8ec8e0"/>
-                <stop offset="100%" stop-color="#5ba8ca"/>
-              </linearGradient>
-              <!-- Land gradient -->
-              <linearGradient id="landGrad" x1="0" y1="0" x2="0.3" y2="1">
-                <stop offset="0%" stop-color="#f0ebe0"/>
-                <stop offset="100%" stop-color="#e8e2d4"/>
-              </linearGradient>
-              <!-- Sand gradient -->
-              <linearGradient id="sandGrad" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#f2d5a8" stop-opacity="0.15"/>
-                <stop offset="50%" stop-color="#f2d5a8" stop-opacity="0.6"/>
-                <stop offset="100%" stop-color="#edc78e" stop-opacity="0.8"/>
-              </linearGradient>
-              <!-- River gradient -->
-              <linearGradient id="riverGrad" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#9dd4e8" stop-opacity="0.4"/>
-                <stop offset="100%" stop-color="#6dbfdb"/>
-              </linearGradient>
-              <!-- Pin drop shadow -->
-              <filter id="pinShadow" x="-30%" y="-10%" width="160%" height="140%">
-                <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#052036" flood-opacity="0.25"/>
-              </filter>
-              <!-- Label background shadow -->
-              <filter id="labelShadow" x="-5%" y="-10%" width="110%" height="130%">
-                <feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="#052036" flood-opacity="0.12"/>
-              </filter>
-              <!-- Subtle wave pattern -->
-              <pattern id="wavePattern" x="0" y="0" width="120" height="20" patternUnits="userSpaceOnUse">
-                <path d="M0 10 Q15 4 30 10 Q45 16 60 10 Q75 4 90 10 Q105 16 120 10" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-              </pattern>
-            </defs>
-
-            <!-- ===== BACKGROUND ===== -->
-            <rect width="960" height="640" fill="url(#oceanGrad)"/>
-            <rect width="960" height="640" fill="url(#wavePattern)"/>
-
-            <!-- Land mass — Ogunquit coastline -->
-            <path d="M0 0 L580 0 Q585 20 588 50 L592 90 Q598 130 600 160
-              Q604 195 600 220 L594 250 Q588 275 584 300
-              Q578 335 572 360 Q565 390 558 420 Q550 455 542 480
-              Q534 510 526 535 Q518 560 510 585 L504 610 L500 640 L0 640 Z"
-              fill="url(#landGrad)"/>
-
-            <!-- Subtle land texture lines -->
-            <path d="M100 0 L100 640" stroke="#ddd8cc" stroke-width="0.5" opacity="0.4"/>
-            <path d="M200 0 L200 640" stroke="#ddd8cc" stroke-width="0.5" opacity="0.3"/>
-            <path d="M300 0 L300 640" stroke="#ddd8cc" stroke-width="0.5" opacity="0.3"/>
-            <path d="M400 0 L400 640" stroke="#ddd8cc" stroke-width="0.5" opacity="0.2"/>
-            <path d="M0 160 L600 160" stroke="#ddd8cc" stroke-width="0.5" opacity="0.3"/>
-            <path d="M0 320 L580 320" stroke="#ddd8cc" stroke-width="0.5" opacity="0.3"/>
-            <path d="M0 480 L540 480" stroke="#ddd8cc" stroke-width="0.5" opacity="0.3"/>
-
-            <!-- Beach sand strip -->
-            <path d="M580 0 Q585 20 588 50 L592 90 Q598 130 600 160
-              Q604 195 600 220 L594 250 Q588 275 584 300
-              Q578 335 572 360 Q565 390 558 420 Q550 455 542 480
-              Q534 510 526 535 Q518 560 510 585 L504 610 L500 640
-              L516 640 L522 610 Q530 580 538 545 Q546 515 554 485
-              Q562 455 570 425 Q578 395 585 365 Q592 335 598 305
-              Q604 280 608 255 L614 225 Q618 195 616 165
-              Q614 135 610 100 L604 60 Q600 30 596 0 Z"
-              fill="url(#sandGrad)"/>
-
-            <!-- Ogunquit River -->
-            <path d="M140 230 Q200 222 280 226 Q360 232 430 240
-              Q490 248 540 258 Q570 264 590 272"
-              fill="none" stroke="url(#riverGrad)" stroke-width="16" stroke-linecap="round"/>
-            <path d="M140 230 Q200 222 280 226 Q360 232 430 240
-              Q490 248 540 258 Q570 264 590 272"
-              fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="4" stroke-linecap="round"/>
-
-            <!-- Roads -->
-            <!-- Route 1 -->
-            <path d="M240 0 L248 60 Q254 120 258 180 L266 260 Q274 340 282 400
-              L290 480 Q296 540 302 600 L306 640"
-              fill="none" stroke="#cec9bc" stroke-width="7" stroke-linecap="round"/>
-            <path d="M240 0 L248 60 Q254 120 258 180 L266 260 Q274 340 282 400
-              L290 480 Q296 540 302 600 L306 640"
-              fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-dasharray="10 14" stroke-linecap="round"/>
-            <!-- Shore Road -->
-            <path d="M350 80 Q400 100 440 140 Q475 175 495 220
-              Q505 260 500 310 Q492 370 476 420 Q460 465 440 510"
-              fill="none" stroke="#cec9bc" stroke-width="5" stroke-linecap="round"/>
-            <!-- Beach Road -->
-            <path d="M260 210 Q340 205 420 216 Q480 226 540 248"
-              fill="none" stroke="#cec9bc" stroke-width="4" stroke-linecap="round"/>
-            <!-- Marginal Way (scenic path) -->
-            <path d="M574 310 Q565 340 555 370 Q545 400 535 430
-              Q528 455 520 475 Q512 495 505 510"
-              fill="none" stroke="#b8b0a0" stroke-width="2" stroke-dasharray="5 5" stroke-linecap="round" opacity="0.7"/>
-
-            <!-- ===== LOCATION MARKERS ===== -->
-
-            <!-- Footbridge Beach -->
-            <g class="map-pin" filter="url(#pinShadow)">
-              <path d="M588 95 L588 60 L580 50 L596 50 L588 60" fill="#ff9152" stroke="#052036" stroke-width="1.5"/>
-              <circle cx="588" cy="45" r="11" fill="#ff9152" stroke="#052036" stroke-width="2"/>
-              <circle cx="588" cy="45" r="4" fill="white"/>
-            </g>
-            <g filter="url(#labelShadow)">
-              <rect x="604" y="33" width="135" height="24" rx="4" fill="rgba(255,255,255,0.92)" stroke="rgba(5,32,54,0.15)" stroke-width="1"/>
-              <text x="612" y="50" class="map-label">Footbridge Beach</text>
-            </g>
-
-            <!-- Main Beach -->
-            <g class="map-pin" filter="url(#pinShadow)">
-              <path d="M592 280 L592 242 L584 232 L600 232 L592 242" fill="#ff9152" stroke="#052036" stroke-width="1.5"/>
-              <circle cx="592" cy="227" r="12" fill="#ff9152" stroke="#052036" stroke-width="2"/>
-              <circle cx="592" cy="227" r="4.5" fill="white"/>
-            </g>
-            <g filter="url(#labelShadow)">
-              <rect x="610" y="215" width="160" height="24" rx="4" fill="rgba(255,255,255,0.92)" stroke="rgba(5,32,54,0.15)" stroke-width="1"/>
-              <text x="618" y="232" class="map-label">Ogunquit Main Beach</text>
-            </g>
-
-            <!-- Charlie's on Beach -->
-            <g class="map-pin" filter="url(#pinShadow)">
-              <path d="M548 298 L548 268 L541 260 L555 260 L548 268" fill="#f2d5a8" stroke="#052036" stroke-width="1.5"/>
-              <circle cx="548" cy="255" r="10" fill="#f2d5a8" stroke="#052036" stroke-width="2"/>
-              <text x="548" y="259" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" font-weight="800" fill="#052036">C</text>
-            </g>
-            <g filter="url(#labelShadow)">
-              <rect x="563" y="249" width="135" height="22" rx="4" fill="rgba(255,255,255,0.92)" stroke="rgba(5,32,54,0.15)" stroke-width="1"/>
-              <text x="570" y="264" class="map-label-sm">Charlie's on Beach</text>
-            </g>
-
-            <!-- 30 Kingfield Ave — HOME BASE (largest marker) -->
-            <g class="map-pin" filter="url(#pinShadow)">
-              <path d="M340 310 L340 265 L330 252 L350 252 L340 265" fill="#ff9152" stroke="#052036" stroke-width="2"/>
-              <circle cx="340" cy="245" r="15" fill="#ff9152" stroke="#052036" stroke-width="2.5"/>
-              <polygon points="340,237 345,243 340,241 335,243" fill="white" opacity="0.9"/>
-              <circle cx="340" cy="248" r="3" fill="white"/>
-            </g>
-            <g filter="url(#labelShadow)">
-              <rect x="250" y="316" width="180" height="28" rx="5" fill="rgba(255,145,82,0.15)" stroke="#ff9152" stroke-width="1.5"/>
-              <text x="262" y="335" class="map-label-home">30 Kingfield Ave</text>
-              <text x="382" y="335" class="map-label-tag">HOME</text>
-            </g>
-
-            <!-- Town Center -->
-            <g class="map-pin" filter="url(#pinShadow)">
-              <path d="M430 155 L430 125 L423 117 L437 117 L430 125" fill="#1178a1" stroke="#052036" stroke-width="1.5"/>
-              <circle cx="430" cy="112" r="10" fill="#1178a1" stroke="#052036" stroke-width="2"/>
-              <text x="430" y="116" text-anchor="middle" font-family="Manrope,sans-serif" font-size="10" font-weight="800" fill="white">P</text>
-            </g>
-            <g filter="url(#labelShadow)">
-              <rect x="446" y="100" width="120" height="24" rx="4" fill="rgba(255,255,255,0.92)" stroke="rgba(5,32,54,0.15)" stroke-width="1"/>
-              <text x="454" y="117" class="map-label">Town Center</text>
-            </g>
-
-            <!-- Perkins Cove -->
-            <g class="map-pin" filter="url(#pinShadow)">
-              <path d="M510 492 L510 458 L503 449 L517 449 L510 458" fill="#1178a1" stroke="#052036" stroke-width="1.5"/>
-              <circle cx="510" cy="444" r="10" fill="#1178a1" stroke="#052036" stroke-width="2"/>
-              <text x="510" y="448" text-anchor="middle" font-family="Manrope,sans-serif" font-size="10" font-weight="800" fill="white">P</text>
-            </g>
-            <g filter="url(#labelShadow)">
-              <rect x="526" y="432" width="120" height="24" rx="4" fill="rgba(255,255,255,0.92)" stroke="rgba(5,32,54,0.15)" stroke-width="1"/>
-              <text x="534" y="449" class="map-label">Perkins Cove</text>
-            </g>
-
-            <!-- Hotel: The Dunes -->
-            <g class="map-pin" filter="url(#pinShadow)">
-              <circle cx="390" cy="196" r="8" fill="#4ad1cf" stroke="#052036" stroke-width="1.5"/>
-              <text x="390" y="200" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" font-weight="800" fill="#052036">H</text>
-            </g>
-            <g filter="url(#labelShadow)">
-              <rect x="402" y="186" width="70" height="20" rx="3" fill="rgba(74,209,207,0.15)" stroke="rgba(74,209,207,0.5)" stroke-width="1"/>
-              <text x="410" y="200" class="map-label-hotel">The Dunes</text>
-            </g>
-
-            <!-- Hotel: The Tides -->
-            <g class="map-pin" filter="url(#pinShadow)">
-              <circle cx="470" cy="258" r="8" fill="#4ad1cf" stroke="#052036" stroke-width="1.5"/>
-              <text x="470" y="262" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" font-weight="800" fill="#052036">H</text>
-            </g>
-            <g filter="url(#labelShadow)">
-              <rect x="482" y="248" width="68" height="20" rx="3" fill="rgba(74,209,207,0.15)" stroke="rgba(74,209,207,0.5)" stroke-width="1"/>
-              <text x="490" y="262" class="map-label-hotel">The Tides</text>
-            </g>
-
-            <!-- Hotel: Aspenquit -->
-            <g class="map-pin" filter="url(#pinShadow)">
-              <circle cx="320" cy="380" r="8" fill="#4ad1cf" stroke="#052036" stroke-width="1.5"/>
-              <text x="320" y="384" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" font-weight="800" fill="#052036">H</text>
-            </g>
-            <g filter="url(#labelShadow)">
-              <rect x="332" y="370" width="77" height="20" rx="3" fill="rgba(74,209,207,0.15)" stroke="rgba(74,209,207,0.5)" stroke-width="1"/>
-              <text x="340" y="384" class="map-label-hotel">Aspenquit</text>
-            </g>
-
-            <!-- Hotel: Cliff House -->
-            <g class="map-pin" filter="url(#pinShadow)">
-              <circle cx="490" cy="560" r="8" fill="#4ad1cf" stroke="#052036" stroke-width="1.5"/>
-              <text x="490" y="564" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" font-weight="800" fill="#052036">H</text>
-            </g>
-            <g filter="url(#labelShadow)">
-              <rect x="502" y="550" width="78" height="20" rx="3" fill="rgba(74,209,207,0.15)" stroke="rgba(74,209,207,0.5)" stroke-width="1"/>
-              <text x="510" y="564" class="map-label-hotel">Cliff House</text>
-            </g>
-
-            <!-- River label -->
-            <text x="300" y="215" class="map-river-label" transform="rotate(-3, 300, 215)">Ogunquit River</text>
-            <!-- Flow arrow -->
-            <path d="M480 244 Q510 250 530 256" fill="none" stroke="#1178a1" stroke-width="1.5" opacity="0.6"/>
-            <polygon points="530,253 536,256 530,259" fill="#1178a1" opacity="0.6"/>
-
-            <!-- Marginal Way label -->
-            <text x="530" y="400" class="map-trail-label" transform="rotate(-70, 530, 400)">Marginal Way</text>
-
-            <!-- Route 1 label -->
-            <g transform="translate(220, 420) rotate(-85)">
-              <text x="0" y="0" class="map-road-label">Route 1</text>
-            </g>
-
-            <!-- Ocean label -->
-            <text x="760" y="340" class="map-ocean-label">Atlantic</text>
-            <text x="752" y="366" class="map-ocean-label">Ocean</text>
-
-            <!-- Compass rose -->
-            <g transform="translate(860, 72)">
-              <circle cx="0" cy="0" r="24" fill="rgba(255,255,255,0.7)" stroke="rgba(5,32,54,0.15)" stroke-width="1"/>
-              <line x1="0" y1="-18" x2="0" y2="18" stroke="#052036" stroke-width="1" opacity="0.4"/>
-              <line x1="-18" y1="0" x2="18" y2="0" stroke="#052036" stroke-width="1" opacity="0.4"/>
-              <polygon points="0,-17 -4,-6 0,-8 4,-6" fill="#052036" opacity="0.7"/>
-              <text x="0" y="-6" text-anchor="middle" font-family="Manrope,sans-serif" font-size="8" font-weight="800" fill="#052036" opacity="0.7">N</text>
-            </g>
-
-            <!-- Legend box -->
-            <g transform="translate(24, 490)">
-              <rect width="200" height="130" rx="6" fill="rgba(255,255,255,0.85)" stroke="rgba(5,32,54,0.12)" stroke-width="1"/>
-              <text x="16" y="22" class="map-legend-title">LEGEND</text>
-              <circle cx="22" cy="42" r="7" fill="#ff9152" stroke="#052036" stroke-width="1.5"/>
-              <text x="38" y="46" class="map-legend-text">Key Locations</text>
-              <circle cx="22" cy="66" r="6" fill="#4ad1cf" stroke="#052036" stroke-width="1.5"/>
-              <text x="38" y="70" class="map-legend-text">Hotels</text>
-              <circle cx="22" cy="90" r="6" fill="#1178a1" stroke="#052036" stroke-width="1.5"/>
-              <text x="38" y="94" class="map-legend-text">Town & Parking</text>
-              <circle cx="22" cy="114" r="6" fill="#f2d5a8" stroke="#052036" stroke-width="1.5"/>
-              <text x="38" y="118" class="map-legend-text">Eats</text>
-            </g>
-          </svg>
+          <div id="ogt-map"></div>
         </div>
       </section>
 
@@ -542,6 +297,77 @@
       applyStaticWidowFix();
       renderHotel();
       window.setInterval(advanceSlide, 4000);
+
+      // ---- OGT Map ----
+      const map = L.map('ogt-map', {
+        scrollWheelZoom: false,
+        zoomControl: false,
+        attributionControl: false
+      }).setView([43.2460, -70.5920], 14);
+
+      // CartoDB Voyager — clean, modern tiles
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        subdomains: 'abcd'
+      }).addTo(map);
+
+      // Minimal attribution bottom-right
+      L.control.attribution({ position: 'bottomright', prefix: false })
+        .addAttribution('CartoDB')
+        .addTo(map);
+
+      // Zoom control top-right
+      L.control.zoom({ position: 'topright' }).addTo(map);
+
+      const pin = (color, size, letter) => {
+        const s = size || 36;
+        const half = s / 2;
+        const inner = letter
+          ? `<span style="font-size:${s * 0.33}px;font-weight:800;color:#052036;line-height:1">${letter}</span>`
+          : `<span style="width:${s * 0.28}px;height:${s * 0.28}px;background:white;border-radius:50%;display:block"></span>`;
+        return L.divIcon({
+          className: 'ogt-marker',
+          html: `<div class="ogt-pin" style="--pin-color:${color};--pin-size:${s}px">${inner}</div>`,
+          iconSize: [s, s + 12],
+          iconAnchor: [half, s + 12],
+          popupAnchor: [0, -(s + 6)]
+        });
+      };
+
+      const popup = (name, sub) => {
+        let html = `<div class="ogt-popup"><strong>${name}</strong>`;
+        if (sub) html += `<span>${sub}</span>`;
+        html += `</div>`;
+        return html;
+      };
+
+      const spots = [
+        { lat: 43.2572, lng: -70.5888, name: 'Footbridge Beach', sub: 'Parking lots available', color: '#ff9152', size: 34 },
+        { lat: 43.2505, lng: -70.5903, name: 'Ogunquit Main Beach', sub: 'Main parking lot', color: '#ff9152', size: 38 },
+        { lat: 43.2525, lng: -70.5875, name: 'Ogunquit River', sub: 'Float from Footbridge to Main Beach', color: '#27a7ce', size: 30, letter: '~' },
+        { lat: 43.2497, lng: -70.5910, name: "Charlie's on Beach", sub: 'Lunch spot', color: '#f2d5a8', size: 30, letter: 'C' },
+        { lat: 43.2482, lng: -70.6002, name: '30 Kingfield Ave', sub: 'Home Base — The Party', color: '#ff9152', size: 44 },
+        { lat: 43.2515, lng: -70.5952, name: 'Town Center', sub: 'Parking lot', color: '#1178a1', size: 30, letter: 'P' },
+        { lat: 43.2380, lng: -70.5890, name: 'Perkins Cove', sub: 'Parking lot', color: '#1178a1', size: 30, letter: 'P' },
+        { lat: 43.2540, lng: -70.5932, name: 'The Dunes', sub: 'Hotel', color: '#4ad1cf', size: 28, letter: 'H' },
+        { lat: 43.2508, lng: -70.5925, name: 'The Tides', sub: 'Hotel', color: '#4ad1cf', size: 28, letter: 'H' },
+        { lat: 43.2490, lng: -70.5975, name: 'Aspenquit', sub: 'Hotel', color: '#4ad1cf', size: 28, letter: 'H' },
+        { lat: 43.2290, lng: -70.5795, name: 'Cliff House', sub: 'Hotel & Spa', color: '#4ad1cf', size: 28, letter: 'H' }
+      ];
+
+      const markers = [];
+      spots.forEach((s) => {
+        const m = L.marker([s.lat, s.lng], {
+          icon: pin(s.color, s.size, s.letter)
+        }).addTo(map).bindPopup(popup(s.name, s.sub), {
+          className: 'ogt-popup-wrap',
+          closeButton: false,
+          offset: [0, 0]
+        });
+        markers.push(m);
+      });
+
+      map.fitBounds(L.featureGroup(markers).getBounds().pad(0.12));
 
 
       // Hamburger Menu - Clean Implementation
