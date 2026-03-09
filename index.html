@@ -3,143 +3,137 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Jordan 50th Surf Session</title>
+    <title>Jordan's 50th — Ogunquit, Maine</title>
     <link rel="icon" type="image/png" href="assets/Jordan_Logo.png" />
-    <link rel="stylesheet" href="styles.css?v=26" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
-    />
+    <link rel="stylesheet" href="styles.css?v=30" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   </head>
   <body>
-    <div class="ocean-layers" aria-hidden="true">
-      <div class="sun-glow"></div>
-      <div class="wave wave-back"></div>
-      <div class="wave wave-mid"></div>
-      <div class="wave wave-front"></div>
-    </div>
 
-    <main class="site">
-      <header class="site-header">
-        <a class="brand" href="#top" aria-label="Jordan 50th home">
-          <img class="brand-logo" src="assets/Jordan_Logo.png" alt="Jordan 50th logo" />
-          <span class="sr-only">Jordan 50th</span>
-        </a>
+    <!-- Film grain overlay -->
+    <svg class="grain" aria-hidden="true">
+      <filter id="gf">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+        <feColorMatrix type="saturate" values="0" />
+      </filter>
+      <rect width="100%" height="100%" filter="url(#gf)" />
+    </svg>
 
-        <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+    <!-- Navigation -->
+    <header class="nav" id="siteNav">
+      <a class="nav-brand" href="#top" aria-label="Home">
+        <img src="assets/Jordan_Logo.png" alt="J" />
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+      <nav class="nav-menu" id="navMenu">
+        <a href="#agenda">Agenda</a>
+        <a href="#location">Map</a>
+        <a href="#lodging">Lodging</a>
+        <a class="nav-rsvp-link" href="mailto:rsvp@sproutstudios.com?subject=Jordan%2050th%20RSVP">RSVP</a>
+      </nav>
+    </header>
 
-        <nav class="menu" id="mainMenu" aria-label="Section navigation">
-          <a href="#overview">Overview</a>
-          <a href="#agenda">Agenda</a>
-          <a href="#location">Location</a>
-          <a href="#lodging">Lodging</a>
-          <a class="menu-rsvp" href="mailto:rsvp@sproutstudios.com?subject=Jordan%2050th%20RSVP">RSVP</a>
-        </nav>
-
-        <a class="header-rsvp desktop-only" href="mailto:rsvp@sproutstudios.com?subject=Jordan%2050th%20RSVP">RSVP</a>
-      </header>
-
-      <section class="hero panel reveal" id="overview" aria-label="Overview">
-        <div class="hero-copy">
-          <h1 id="top">Jordans 50th</h1>
-          <p class="lead">
-            Jordan turns 50 this June, and we are gathering friends, family, and longtime collaborators for a warm,
-            high-energy night at Sprout Studios. Think sunset hangs, good food, thoughtful toasts, and a dance floor that
-            carries the wave through the evening.
-          </p>
-
-          <div class="fact-grid" aria-label="Key details">
-            <article class="fact-item">
-              <p class="fact-label">Date</p>
-              <p class="fact-value">June 13th</p>
-            </article>
-            <article class="fact-item">
-              <p class="fact-label">Time</p>
-              <p class="fact-value">6 PM till Late</p>
-            </article>
-            <article class="fact-item">
-              <p class="fact-label">Location</p>
-              <p class="fact-value">30 Kingfield Ave, Ogunquit, Maine</p>
-            </article>
-          </div>
-
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="hero-media">
+        <img class="hero-img active" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80" alt="Ocean wave" />
+        <img class="hero-img" src="https://images.unsplash.com/photo-1476673160081-cf065607f449?auto=format&fit=crop&w=1600&q=80" alt="Golden sunset" />
+        <img class="hero-img" src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1600&q=80" alt="Waves crashing" />
+        <img class="hero-img" src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?auto=format&fit=crop&w=1600&q=80" alt="Beach sunset" />
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="hero-content">
+        <p class="hero-kicker">Ogunquit, Maine</p>
+        <h1><em>Jordan's</em> 50th</h1>
+        <p class="hero-dateline">June 13, 2026</p>
+        <a class="hero-cta" href="mailto:rsvp@sproutstudios.com?subject=Jordan%2050th%20RSVP">RSVP &rarr;</a>
+      </div>
+      <div class="hero-strip">
+        <div class="strip-item">
+          <span class="strip-label">Date</span>
+          <span class="strip-value">June 13th</span>
         </div>
-
-        <div class="hero-visual">
-          <img class="hero-slide active"
-            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80"
-            alt="Ocean wave at sunset"
-          />
-          <img class="hero-slide"
-            src="https://images.unsplash.com/photo-1476673160081-cf065607f449?auto=format&fit=crop&w=1600&q=80"
-            alt="Golden sunset over the ocean"
-          />
-          <img class="hero-slide"
-            src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1600&q=80"
-            alt="Waves crashing at sunset"
-          />
-          <img class="hero-slide"
-            src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?auto=format&fit=crop&w=1600&q=80"
-            alt="Tropical beach at golden hour"
-          />
-          <p class="hero-date">Save the Date // June 13, 2026</p>
-          <a class="board-tag" href="mailto:rsvp@sproutstudios.com?subject=Jordan%2050th%20RSVP">RSVP</a>
+        <div class="strip-item">
+          <span class="strip-label">Time</span>
+          <span class="strip-value">6 PM till Late</span>
         </div>
-      </section>
+        <div class="strip-item">
+          <span class="strip-label">Location</span>
+          <span class="strip-value">30 Kingfield Ave, Ogunquit</span>
+        </div>
+      </div>
+      <div class="hero-scroll" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
 
-      <section class="section reveal" id="agenda" aria-labelledby="agenda-title">
-        <h2 id="agenda-title">Agenda</h2>
-        <div class="section-panel agenda-panel">
-          <article class="agenda-item">
-            <p class="agenda-time">9:00 AM</p>
-            <p class="agenda-copy">Beachday — Ogunquit Main Beach</p>
+    <!-- About -->
+    <section class="about sect-light reveal">
+      <div class="wrap">
+        <p class="about-text">
+          Jordan turns 50 this June, and we're gathering friends, family, and longtime
+          collaborators for a warm, high-energy celebration in Ogunquit. Think sunset hangs,
+          good food, thoughtful toasts, and a dance floor that carries the wave through the&nbsp;evening.
+        </p>
+      </div>
+    </section>
+
+    <!-- Agenda -->
+    <section class="agenda sect-light reveal" id="agenda">
+      <div class="wrap">
+        <h2 class="sect-head">The Day</h2>
+        <div class="agenda-list">
+          <article class="agenda-row">
+            <span class="a-time">9:00 AM</span>
+            <div class="a-body"><p class="a-name">Beach Day</p><p class="a-sub">Ogunquit Main Beach</p></div>
           </article>
-          <article class="agenda-item">
-            <p class="agenda-time">12:00 PM</p>
-            <p class="agenda-copy">Ogunquit Riverfloat — Footbridge to Main Beach</p>
+          <article class="agenda-row">
+            <span class="a-time">12:00 PM</span>
+            <div class="a-body"><p class="a-name">Ogunquit Riverfloat</p><p class="a-sub">Footbridge to Main Beach</p></div>
           </article>
-          <article class="agenda-item">
-            <p class="agenda-time">1:00 PM</p>
-            <p class="agenda-copy">Lunch @ Charlie's on Beach</p>
+          <article class="agenda-row">
+            <span class="a-time">1:00 PM</span>
+            <div class="a-body"><p class="a-name">Lunch @ Charlie's</p><p class="a-sub">Charlie's on Beach</p></div>
           </article>
-          <article class="agenda-item">
-            <p class="agenda-time">5:00 PM</p>
-            <p class="agenda-copy">Happy Hour</p>
+          <article class="agenda-row">
+            <span class="a-time">5:00 PM</span>
+            <div class="a-body"><p class="a-name">Happy Hour</p><p class="a-sub">30 Kingfield Ave</p></div>
           </article>
-          <article class="agenda-item">
-            <p class="agenda-time">7:00 PM</p>
-            <p class="agenda-copy">Dinner — Brazilian BBQ</p>
+          <article class="agenda-row">
+            <span class="a-time">7:00 PM</span>
+            <div class="a-body"><p class="a-name">Dinner — Brazilian BBQ</p><p class="a-sub">30 Kingfield Ave</p></div>
           </article>
-          <article class="agenda-item">
-            <p class="agenda-time">9:00 PM</p>
-            <p class="agenda-copy">DJ — 90's Hip Hop, Funk & Soul</p>
+          <article class="agenda-row">
+            <span class="a-time">9:00 PM</span>
+            <div class="a-body"><p class="a-name">DJ Set</p><p class="a-sub">90's Hip Hop, Funk &amp; Soul</p></div>
           </article>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section reveal" id="location" aria-labelledby="location-title">
-        <h2 id="location-title">Map of OGT</h2>
-        <div class="map-wrap">
+    <!-- Location / Map -->
+    <section class="location sect-dark reveal" id="location">
+      <div class="wrap">
+        <h2 class="sect-head">Ogunquit</h2>
+        <div class="map-frame">
           <div id="ogt-map"></div>
-          <!-- Floating legend overlay -->
           <div class="map-legend" id="mapLegend">
-            <p class="map-legend-head">Spots</p>
-            <ul class="map-legend-list" id="legendList"></ul>
-            <button class="map-legend-reset" id="legendReset" type="button">Show All</button>
+            <p class="legend-title">Spots</p>
+            <ul class="legend-list" id="legendList"></ul>
+            <button class="legend-reset" id="legendReset" type="button">Show All</button>
           </div>
         </div>
         <div class="shore-grid">
           <article class="shore-card">
             <p class="shore-label">Getting Here</p>
-            <p>Driving</p>
-            <p>Down Easter</p>
-            <p>Bus C&J</p>
+            <p>Driving / Down Easter / Bus C&amp;J</p>
           </article>
           <article class="shore-card">
             <p class="shore-label">Parking</p>
@@ -147,8 +141,7 @@
           </article>
           <article class="shore-card">
             <p class="shore-label">OGT Lots</p>
-            <p>Hotel</p>
-            <p>Field Across from my House</p>
+            <p>Hotel / Field across from the house</p>
           </article>
           <article class="shore-card">
             <p class="shore-label">Arrival</p>
@@ -156,49 +149,55 @@
           </article>
           <article class="shore-card">
             <p class="shore-label">Getting Around</p>
-            <p>Walking</p>
-            <p>Biking</p>
-            <p>Trolley</p>
-            <p>Golf Cart Taxi</p>
+            <p>Walking / Biking / Trolley / Golf Cart Taxi</p>
           </article>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section reveal" id="lodging" aria-labelledby="lodging-title">
-        <h2 id="lodging-title">Lodging</h2>
-        <div class="section-panel lodging-panel">
-          <button class="arrow-btn" type="button" data-dir="prev" aria-label="Previous hotel">
-            <svg class="arrow-icon" viewBox="0 0 18 28" aria-hidden="true" focusable="false">
-              <path d="M16 2 L2 14 L16 26 Z" fill="none" stroke="currentColor" stroke-width="2" />
-            </svg>
+    <!-- Lodging -->
+    <section class="lodging sect-light reveal" id="lodging">
+      <div class="wrap">
+        <h2 class="sect-head">Lodging</h2>
+        <div class="lodge-wrap">
+          <button class="lodge-arrow lodge-prev" type="button" data-dir="prev" aria-label="Previous hotel">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
           </button>
-
-          <article class="lodging-card" id="lodgingCard">
-            <img id="lodging-image" src="" alt="" />
-            <div class="lodging-body">
-              <p class="lodging-name" id="lodging-name"></p>
-              <p class="lodging-meta" id="lodging-meta"></p>
-              <p class="lodging-description" id="lodging-description"></p>
-              <p class="lodging-offer" id="lodging-offer"></p>
+          <article class="lodge-card" id="lodgeCard">
+            <div class="lodge-img-wrap">
+              <img id="lodge-img" src="" alt="" />
+            </div>
+            <div class="lodge-info">
+              <p class="lodge-name" id="lodge-name"></p>
+              <p class="lodge-meta" id="lodge-meta"></p>
+              <p class="lodge-desc" id="lodge-desc"></p>
+              <span class="lodge-badge" id="lodge-badge"></span>
             </div>
           </article>
-
-          <button class="arrow-btn" type="button" data-dir="next" aria-label="Next hotel">
-            <svg class="arrow-icon" viewBox="0 0 18 28" aria-hidden="true" focusable="false">
-              <path d="M2 2 L16 14 L2 26 Z" fill="none" stroke="currentColor" stroke-width="2" />
-            </svg>
+          <button class="lodge-arrow lodge-next" type="button" data-dir="next" aria-label="Next hotel">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
           </button>
         </div>
-        <div class="lodging-rates" id="lodgingRates"></div>
-        <div class="lodging-mobile-nav" id="lodgingMobileNav">
-          <button type="button" data-dir="prev">← Prev</button>
-          <button type="button" data-dir="next">Next →</button>
+        <div class="lodge-dots" id="lodgeDots"></div>
+        <div class="lodge-rates" id="lodgeRates"></div>
+        <div class="lodge-mob-nav" id="lodgeMobNav">
+          <button type="button" data-dir="prev">&larr; Prev</button>
+          <button type="button" data-dir="next">Next &rarr;</button>
         </div>
-      </section>
+      </div>
+    </section>
 
-    </main>
+    <!-- Footer -->
+    <footer class="footer sect-dark">
+      <div class="wrap">
+        <p class="footer-tagline"><em>See you on the sand.</em></p>
+        <a class="footer-rsvp" href="mailto:rsvp@sproutstudios.com?subject=Jordan%2050th%20RSVP">RSVP</a>
+        <p class="footer-note">June 13, 2026 — Ogunquit, Maine</p>
+      </div>
+    </footer>
 
     <script>
+      /* ====== DATA ====== */
       const hotels = [
         {
           name: "The Dunes",
@@ -255,127 +254,142 @@
         }
       ];
 
-      const heroSlides = document.querySelectorAll('.hero-slide');
-      let slideIndex = 0;
+      const spots = [
+        { lat: 43.2574, lng: -70.5986, name: '30 Kingfield Ave', sub: 'The house. Happy hour, dinner, DJ — everything happens here.', grad: 'linear-gradient(135deg, #d4943a, #b87a28)', dot: '#d4943a', home: true },
+        { lat: 43.2504, lng: -70.5950, name: 'Ogunquit Main Beach', sub: '3.5 miles of white sand. Beach day starts at 9 AM. Paid parking on Beach St.', grad: 'linear-gradient(135deg, #e8c55a, #c9a83e)', dot: '#e8c55a' },
+        { lat: 43.2644, lng: -70.5977, name: 'Footbridge Beach', sub: 'Quieter north end. Cross the iconic footbridge to get there. Free overflow lot.', grad: 'linear-gradient(135deg, #d4a86a, #b8894a)', dot: '#d4a86a' },
+        { lat: 43.2580, lng: -70.5940, name: 'Ogunquit River', sub: 'Lazy float from Footbridge down to Main Beach. Bring a tube, grab a current.', grad: 'linear-gradient(135deg, #3ba5a5, #2d8a8a)', dot: '#3ba5a5' },
+        { lat: 43.2504, lng: -70.5949, name: "Charlie's on Beach", sub: 'Fried clams, lobster rolls, cold beer. Right on Beach St — 1 PM lunch stop.', grad: 'linear-gradient(135deg, #c4552d, #a33e1e)', dot: '#c4552d' },
+        { lat: 43.2488, lng: -70.5999, name: 'Town Center', sub: 'Ogunquit Square — shops, galleries, ice cream. Public lot on Shore Rd.', grad: 'linear-gradient(135deg, #5a8ab4, #4270a0)', dot: '#5a8ab4' },
+        { lat: 43.2378, lng: -70.5926, name: 'Perkins Cove', sub: 'Walk the Marginal Way to get here. Harbor, galleries, cocktails at sunset.', grad: 'linear-gradient(135deg, #8a6aaa, #6e4e90)', dot: '#8a6aaa' },
+        { lat: 43.2634, lng: -70.5979, name: 'The Dunes', sub: 'Classic riverside cottages with rowboats. Old-school Maine charm.', grad: 'linear-gradient(135deg, #4ab5b5, #359e9e)', dot: '#4ab5b5' },
+        { lat: 43.2603, lng: -70.5988, name: 'Ogunquit Tides', sub: 'Right on Main St near Footbridge Beach. Pool, clean rooms, solid value.', grad: 'linear-gradient(135deg, #5aaa7a, #3d8e5e)', dot: '#5aaa7a' },
+        { lat: 43.2419, lng: -70.6021, name: 'Meadowmere', sub: 'Full resort on Main St. Indoor/outdoor pools, spa, walkable to town.', grad: 'linear-gradient(135deg, #6a8fd8, #4a6eb8)', dot: '#6a8fd8' },
+        { lat: 43.2191, lng: -70.5835, name: 'Cliff House', sub: 'Luxury clifftop resort in Cape Neddick. Ocean-view spa, fine dining, the works.', grad: 'linear-gradient(135deg, #b47ab4, #9a5a9a)', dot: '#b47ab4' }
+      ];
 
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      /* ====== ELEMENTS ====== */
+      const imgEl = document.getElementById('lodge-img');
+      const nameEl = document.getElementById('lodge-name');
+      const metaEl = document.getElementById('lodge-meta');
+      const descEl = document.getElementById('lodge-desc');
+      const badgeEl = document.getElementById('lodge-badge');
+      const ratesEl = document.getElementById('lodgeRates');
+      const dotsWrap = document.getElementById('lodgeDots');
+      const heroSlides = document.querySelectorAll('.hero-img');
+      let slideIdx = 0;
+      let hotelIdx = 0;
+      const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      const heroVisualEl = document.querySelector('.hero-visual');
+      /* ====== LODGING DOTS ====== */
+      hotels.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'dot' + (i === 0 ? ' active' : '');
+        d.ariaLabel = hotels[i].name;
+        d.addEventListener('click', () => { hotelIdx = i; renderHotel(); });
+        dotsWrap.appendChild(d);
+      });
 
-      const imageEl = document.getElementById('lodging-image');
-      const nameEl = document.getElementById('lodging-name');
-      const metaEl = document.getElementById('lodging-meta');
-      const descriptionEl = document.getElementById('lodging-description');
-      const offerEl = document.getElementById('lodging-offer');
-      const ratesEl = document.getElementById('lodgingRates');
+      /* ====== RENDER HOTEL ====== */
+      function renderHotel() {
+        const h = hotels[hotelIdx];
+        imgEl.classList.remove('vis');
+        setTimeout(() => {
+          imgEl.src = h.image;
+          imgEl.alt = h.name;
+          nameEl.textContent = h.name;
+          metaEl.textContent = h.meta;
+          descEl.textContent = h.description;
+          badgeEl.textContent = h.offer || '';
+          imgEl.classList.add('vis');
 
-      let hotelIndex = 0;
+          // Dots
+          dotsWrap.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === hotelIdx));
 
-      const preventWidow = (text) => {
-        const words = text.trim().split(/\s+/);
-        if (words.length < 3) return text;
-        const lastWord = words.pop();
-        words[words.length - 1] = `${words[words.length - 1]}\u00A0${lastWord}`;
-        return words.join(' ');
-      };
-
-      const setTextNoWidow = (el, text) => {
-        el.textContent = preventWidow(text);
-      };
-
-      const applyStaticWidowFix = () => {
-        const staticTargets = document.querySelectorAll(
-          '.lead, .agenda-copy, .agenda-note, .shore-card p:last-child'
-        );
-        staticTargets.forEach((el) => setTextNoWidow(el, el.textContent));
-      };
-
-      const renderHotel = () => {
-        const hotel = hotels[hotelIndex];
-        imageEl.classList.remove('is-visible');
-
-        window.setTimeout(() => {
-          imageEl.src = hotel.image;
-          imageEl.alt = `${hotel.name} preview`;
-          setTextNoWidow(nameEl, hotel.name);
-          setTextNoWidow(metaEl, hotel.meta);
-          setTextNoWidow(descriptionEl, hotel.description);
-          offerEl.textContent = hotel.offer || '';
-          imageEl.classList.add('is-visible');
-
-          // Render rates table
-          if (hotel.rates && hotel.rates.length && ratesEl) {
-            const label = hotel.rateLabel || 'Rate';
-            const rows = hotel.rates.map(r =>
-              `<div class="rate-row"><span class="rate-room">${r.room}</span><span class="rate-price">${r.rate}</span></div>`
+          // Rates
+          if (h.rates && h.rates.length) {
+            const rows = h.rates.map(r =>
+              `<div class="rt-row"><span class="rt-room">${r.room}</span><span class="rt-price">${r.rate}</span></div>`
             ).join('');
-            ratesEl.innerHTML = `<div class="rate-head"><span>Room Type</span><span>${label}</span></div>${rows}`;
-            ratesEl.style.display = '';
-          } else if (ratesEl) {
-            ratesEl.innerHTML = '';
-            ratesEl.style.display = 'none';
-          }
-        }, prefersReducedMotion ? 0 : 120);
-      };
-
-      const advanceSlide = () => {
-        heroSlides[slideIndex].classList.remove('active');
-        slideIndex = (slideIndex + 1) % heroSlides.length;
-        heroSlides[slideIndex].classList.add('active');
-      };
-
-      document.querySelectorAll('.lodging-panel .arrow-btn').forEach((button) => {
-        button.addEventListener('click', () => {
-          if (button.dataset.dir === 'next') {
-            hotelIndex = (hotelIndex + 1) % hotels.length;
+            ratesEl.innerHTML = `<div class="rt-head"><span>Room Type</span><span>${h.rateLabel || 'Rate'}</span></div>${rows}`;
           } else {
-            hotelIndex = (hotelIndex - 1 + hotels.length) % hotels.length;
+            ratesEl.innerHTML = '';
           }
+        }, noMotion ? 0 : 100);
+      }
+
+      /* ====== HERO SLIDESHOW ====== */
+      function nextSlide() {
+        heroSlides[slideIdx].classList.remove('active');
+        slideIdx = (slideIdx + 1) % heroSlides.length;
+        heroSlides[slideIdx].classList.add('active');
+      }
+
+      /* ====== LODGING ARROWS ====== */
+      document.querySelectorAll('.lodge-arrow').forEach(btn => {
+        btn.addEventListener('click', () => {
+          hotelIdx = btn.dataset.dir === 'next'
+            ? (hotelIdx + 1) % hotels.length
+            : (hotelIdx - 1 + hotels.length) % hotels.length;
           renderHotel();
         });
       });
 
-      if (heroVisualEl && !prefersReducedMotion) {
-        const resetTilt = () => {
-          heroVisualEl.style.setProperty('--tilt-x', '0deg');
-          heroVisualEl.style.setProperty('--tilt-y', '0deg');
-        };
-
-        heroVisualEl.addEventListener('mousemove', (event) => {
-          const bounds = heroVisualEl.getBoundingClientRect();
-          const x = (event.clientX - bounds.left) / bounds.width;
-          const y = (event.clientY - bounds.top) / bounds.height;
-          const tiltX = (x - 0.5) * 4;
-          const tiltY = (0.5 - y) * 4;
-          heroVisualEl.style.setProperty('--tilt-x', `${tiltX}deg`);
-          heroVisualEl.style.setProperty('--tilt-y', `${tiltY}deg`);
+      /* ====== MOBILE LODGE NAV ====== */
+      document.getElementById('lodgeMobNav').querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          hotelIdx = btn.dataset.dir === 'next'
+            ? (hotelIdx + 1) % hotels.length
+            : (hotelIdx - 1 + hotels.length) % hotels.length;
+          renderHotel();
         });
+      });
 
-        heroVisualEl.addEventListener('mouseleave', resetTilt);
-      }
+      /* ====== TOUCH SWIPE ====== */
+      const lodgeCard = document.getElementById('lodgeCard');
+      let tx = 0;
+      lodgeCard.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, { passive: true });
+      lodgeCard.addEventListener('touchend', e => {
+        const diff = tx - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) {
+          hotelIdx = diff > 0 ? (hotelIdx + 1) % hotels.length : (hotelIdx - 1 + hotels.length) % hotels.length;
+          renderHotel();
+        }
+      }, { passive: true });
 
-      if (!prefersReducedMotion) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('in-view');
-              }
-            });
-          },
-          { threshold: 0.15 }
-        );
+      /* ====== NAV TOGGLE ====== */
+      const navToggle = document.getElementById('navToggle');
+      const navMenu = document.getElementById('navMenu');
+      navToggle.addEventListener('click', () => {
+        const open = navMenu.classList.toggle('open');
+        navToggle.classList.toggle('active', open);
+        navToggle.setAttribute('aria-expanded', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+      navMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          navMenu.classList.remove('open');
+          navToggle.classList.remove('active');
+          navToggle.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        });
+      });
 
-        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      /* ====== SCROLL REVEAL ====== */
+      if (!noMotion) {
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       } else {
-        document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in-view'));
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('in-view'));
       }
 
-      applyStaticWidowFix();
+      /* ====== INIT ====== */
       renderHotel();
-      window.setInterval(advanceSlide, 4000);
+      setInterval(nextSlide, 6000);
 
-      // ---- OGT Map — Premium Interactive ----
+      /* ====== LEAFLET MAP ====== */
       const map = L.map('ogt-map', {
         scrollWheelZoom: true,
         zoomControl: false,
@@ -385,182 +399,82 @@
         zoomAnimation: true,
         markerZoomAnimation: true,
         wheelPxPerZoomLevel: 90,
-        doubleClickZoom: true,
-        dragging: true,
         inertia: true,
-        inertiaDeceleration: 2000,
-        easeLinearity: 0.25
+        inertiaDeceleration: 2000
       }).setView([43.2510, -70.5960], 15.75);
 
-      // CartoDB Voyager — warm, detailed, light
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
         maxZoom: 19,
         subdomains: 'abcd'
       }).addTo(map);
 
       L.control.zoom({ position: 'topright' }).addTo(map);
 
-      // Marker factory — all same size, white dot, unique gradient
-      const PIN_SIZE = 30;
-      const makePin = (gradient) => {
-        return L.divIcon({
-          className: 'ogt-marker',
-          html: `<div class="ogt-pin" style="background:${gradient}"><span class="pin-dot"></span></div>`,
-          iconSize: [PIN_SIZE + 8, PIN_SIZE + 18],
-          iconAnchor: [(PIN_SIZE + 8) / 2, PIN_SIZE + 18],
-          popupAnchor: [0, -(PIN_SIZE + 10)]
-        });
-      };
-
-      const makePopup = (name, sub, color) =>
-        `<div class="ogt-popup">
-          <i class="popup-accent" style="background:${color}"></i>
-          <div class="popup-body">
-            <strong>${name}</strong>
-            ${sub ? `<span>${sub}</span>` : ''}
-          </div>
-        </div>`;
-
-      const spots = [
-        { lat: 43.2574, lng: -70.5986, name: '30 Kingfield Ave', sub: 'The house. Happy hour, dinner, DJ — everything happens here.', grad: 'linear-gradient(135deg, #ff9152, #e06b2a)', dot: '#ff9152', home: true },
-        { lat: 43.2504, lng: -70.5950, name: 'Ogunquit Main Beach', sub: '3.5 miles of white sand. Beach day starts at 9 AM. Paid parking on Beach St.', grad: 'linear-gradient(135deg, #f7c948, #e0a815)', dot: '#f7c948' },
-        { lat: 43.2644, lng: -70.5977, name: 'Footbridge Beach', sub: 'Quieter north end. Cross the iconic footbridge to get there. Free overflow lot.', grad: 'linear-gradient(135deg, #f2a65a, #d4863a)', dot: '#f2a65a' },
-        { lat: 43.2580, lng: -70.5940, name: 'Ogunquit River', sub: 'Lazy float from Footbridge down to Main Beach. Bring a tube, grab a current.', grad: 'linear-gradient(135deg, #27a7ce, #1a7fa0)', dot: '#27a7ce' },
-        { lat: 43.2504, lng: -70.5949, name: "Charlie's on Beach", sub: 'Fried clams, lobster rolls, cold beer. Right on Beach St — 1 PM lunch stop.', grad: 'linear-gradient(135deg, #e8746a, #c4524a)', dot: '#e8746a' },
-        { lat: 43.2488, lng: -70.5999, name: 'Town Center', sub: 'Ogunquit Square — shops, galleries, ice cream. Public lot on Shore Rd.', grad: 'linear-gradient(135deg, #1178a1, #0b5d80)', dot: '#1178a1' },
-        { lat: 43.2378, lng: -70.5926, name: 'Perkins Cove', sub: 'Walk the Marginal Way to get here. Harbor, galleries, cocktails at sunset.', grad: 'linear-gradient(135deg, #7b68c4, #5a4a9e)', dot: '#7b68c4' },
-        { lat: 43.2634, lng: -70.5979, name: 'The Dunes', sub: 'Classic riverside cottages with rowboats. Old-school Maine charm.', grad: 'linear-gradient(135deg, #4ad1cf, #2eb0ae)', dot: '#4ad1cf' },
-        { lat: 43.2603, lng: -70.5988, name: 'Ogunquit Tides', sub: 'Right on Main St near Footbridge Beach. Pool, clean rooms, solid value.', grad: 'linear-gradient(135deg, #5bbf8a, #3d9e6c)', dot: '#5bbf8a' },
-        { lat: 43.2419, lng: -70.6021, name: 'Meadowmere', sub: 'Full resort on Main St. Indoor/outdoor pools, spa, walkable to town.', grad: 'linear-gradient(135deg, #6a9fd8, #4a7eb8)', dot: '#6a9fd8' },
-        { lat: 43.2191, lng: -70.5835, name: 'Cliff House', sub: 'Luxury clifftop resort in Cape Neddick. Ocean-view spa, fine dining, the works.', grad: 'linear-gradient(135deg, #c47bc4, #a05aa0)', dot: '#c47bc4' }
-      ];
-
-      const allMarkers = [];
-      spots.forEach((s, i) => {
-        const m = L.marker([s.lat, s.lng], {
-          icon: makePin(s.grad)
-        }).addTo(map).bindPopup(makePopup(s.name, s.sub, s.dot), {
-          className: 'ogt-popup-wrap',
-          closeButton: false,
-          maxWidth: 300,
-          minWidth: 200,
-          offset: [0, 4]
-        }).bindTooltip(s.name, {
-          className: 'ogt-tooltip',
-          direction: 'top',
-          offset: [0, -(PIN_SIZE + 14)],
-          opacity: 1
-        });
-        m._spotIndex = i;
-        allMarkers.push(m);
+      const PIN = 28;
+      const makeIcon = grad => L.divIcon({
+        className: 'pin-wrap',
+        html: `<div class="pin" style="background:${grad}"><i class="pin-dot"></i></div>`,
+        iconSize: [PIN + 8, PIN + 16],
+        iconAnchor: [(PIN + 8) / 2, PIN + 16],
+        popupAnchor: [0, -(PIN + 8)]
       });
 
-      // Build interactive legend
+      const popupHtml = (name, sub, color) =>
+        `<div class="pop"><i class="pop-bar" style="background:${color}"></i><div class="pop-body"><strong>${name}</strong>${sub ? `<span>${sub}</span>` : ''}</div></div>`;
+
+      const markers = [];
+      spots.forEach((s, i) => {
+        const m = L.marker([s.lat, s.lng], { icon: makeIcon(s.grad) })
+          .addTo(map)
+          .bindPopup(popupHtml(s.name, s.sub, s.dot), {
+            className: 'pop-wrap',
+            closeButton: false,
+            maxWidth: 280,
+            minWidth: 180,
+            offset: [0, 4]
+          })
+          .bindTooltip(s.name, {
+            className: 'tip',
+            direction: 'top',
+            offset: [0, -(PIN + 12)],
+            opacity: 1
+          });
+        m._si = i;
+        markers.push(m);
+      });
+
+      /* Legend */
       const legendList = document.getElementById('legendList');
       spots.forEach((s, i) => {
         const li = document.createElement('li');
         li.innerHTML = `<i style="background:${s.dot}"></i><span>${s.name}</span>`;
         li.dataset.index = i;
         li.addEventListener('click', () => {
-          const mk = allMarkers[i];
           map.flyTo([s.lat, s.lng], 17, { duration: 0.8 });
-          setTimeout(() => mk.openPopup(), 500);
-          // Highlight active
-          legendList.querySelectorAll('li').forEach(l => l.classList.remove('is-active'));
-          li.classList.add('is-active');
+          setTimeout(() => markers[i].openPopup(), 500);
+          legendList.querySelectorAll('li').forEach(l => l.classList.remove('on'));
+          li.classList.add('on');
         });
         legendList.appendChild(li);
       });
 
-      // Show All reset
-      const allBounds = L.featureGroup(allMarkers).getBounds().pad(0.08);
+      const allBounds = L.featureGroup(markers).getBounds().pad(0.08);
       map.fitBounds(allBounds);
+
       document.getElementById('legendReset').addEventListener('click', () => {
         map.flyToBounds(allBounds, { duration: 0.8 });
         map.closePopup();
-        legendList.querySelectorAll('li').forEach(l => l.classList.remove('is-active'));
+        legendList.querySelectorAll('li').forEach(l => l.classList.remove('on'));
       });
 
-      // Also open popup on marker click + sync legend
-      allMarkers.forEach((m) => {
+      markers.forEach(m => {
         m.on('click', () => {
-          map.flyTo([spots[m._spotIndex].lat, spots[m._spotIndex].lng], 17, { duration: 0.8 });
-          legendList.querySelectorAll('li').forEach(l => l.classList.remove('is-active'));
-          const li = legendList.querySelector(`[data-index="${m._spotIndex}"]`);
-          if (li) li.classList.add('is-active');
+          map.flyTo([spots[m._si].lat, spots[m._si].lng], 17, { duration: 0.8 });
+          legendList.querySelectorAll('li').forEach(l => l.classList.remove('on'));
+          const li = legendList.querySelector(`[data-index="${m._si}"]`);
+          if (li) li.classList.add('on');
         });
       });
-
-      // Mobile lodging nav
-      const mobileNav = document.getElementById('lodgingMobileNav');
-      if (mobileNav) {
-        mobileNav.querySelectorAll('button').forEach((btn) => {
-          btn.addEventListener('click', () => {
-            if (btn.dataset.dir === 'next') {
-              hotelIndex = (hotelIndex + 1) % hotels.length;
-            } else {
-              hotelIndex = (hotelIndex - 1 + hotels.length) % hotels.length;
-            }
-            renderHotel();
-          });
-        });
-      }
-
-      // Touch swipe on lodging card
-      const lodgingCard = document.getElementById('lodgingCard');
-      if (lodgingCard) {
-        let touchStartX = 0;
-        let touchEndX = 0;
-        lodgingCard.addEventListener('touchstart', (e) => {
-          touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-        lodgingCard.addEventListener('touchend', (e) => {
-          touchEndX = e.changedTouches[0].screenX;
-          const diff = touchStartX - touchEndX;
-          if (Math.abs(diff) > 50) {
-            if (diff > 0) {
-              hotelIndex = (hotelIndex + 1) % hotels.length;
-            } else {
-              hotelIndex = (hotelIndex - 1 + hotels.length) % hotels.length;
-            }
-            renderHotel();
-          }
-        }, { passive: true });
-      }
-
-      // Hamburger Menu - Clean Implementation
-      const hamburgerBtn = document.getElementById('hamburgerBtn');
-      const mainMenu = document.getElementById('mainMenu');
-      
-      if (hamburgerBtn && mainMenu) {
-        hamburgerBtn.addEventListener('click', () => {
-          const isOpen = mainMenu.classList.contains('open');
-          
-          if (isOpen) {
-            // Close menu
-            mainMenu.classList.remove('open');
-            hamburgerBtn.classList.remove('active');
-            hamburgerBtn.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
-          } else {
-            // Open menu
-            mainMenu.classList.add('open');
-            hamburgerBtn.classList.add('active');
-            hamburgerBtn.setAttribute('aria-expanded', 'true');
-            document.body.style.overflow = 'hidden';
-          }
-        });
-
-        // Close menu when clicking a link
-        mainMenu.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', () => {
-            mainMenu.classList.remove('open');
-            hamburgerBtn.classList.remove('active');
-            hamburgerBtn.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
-          });
-        });
-      }
     </script>
   </body>
 </html>
