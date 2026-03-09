@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jordan 50th Surf Session</title>
     <link rel="icon" type="image/png" href="assets/Jordan_Logo.png" />
-    <link rel="stylesheet" href="styles.css?v=5" />
+    <link rel="stylesheet" href="styles.css?v=6" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
@@ -122,7 +122,18 @@
       </section>
 
       <section class="section reveal" id="location" aria-labelledby="location-title">
-        <h2 id="location-title">Map of OGT</h2>
+        <h2 id="location-title">Location</h2>
+        <div class="section-panel location-legend">
+          <p class="legend-title">Map of OGT</p>
+          <p>Ogunquit Main Beach & Parking Lot</p>
+          <p>Ogunquit River</p>
+          <p>Footbridge Beach & Parking Lots</p>
+          <p>Charlie's on Beach</p>
+          <p>30 Kingfield Ave OGT</p>
+          <p>Town Center & Parking Lot</p>
+          <p>Perkins Cove & Parking Lot</p>
+          <p>4 Hotels: Dunes, Tides, Aspenquit & Cliff House</p>
+        </div>
         <div class="section-panel map-panel">
           <iframe
             title="Map of Ogunquit, Maine"
@@ -133,30 +144,24 @@
         </div>
         <div class="shore-grid">
           <article class="shore-card">
-            <p class="shore-label">Beaches</p>
-            <p>Ogunquit Main Beach & Parking Lot</p>
-            <p>Footbridge Beach & Parking Lots</p>
+            <p class="shore-label">Getting Here</p>
+            <p>Drive with a clear drop-off point at the house.</p>
           </article>
           <article class="shore-card">
-            <p class="shore-label">River</p>
-            <p>Ogunquit River — Footbridge to Main Beach</p>
+            <p class="shore-label">Uber</p>
+            <p>Rides available from Key House and around town.</p>
           </article>
           <article class="shore-card">
-            <p class="shore-label">Eats & Drinks</p>
-            <p>Charlie's on Beach</p>
+            <p class="shore-label">OGT Lots</p>
+            <p>Main Beach, Footbridge & Perkins Cove all have lots.</p>
           </article>
           <article class="shore-card">
-            <p class="shore-label">Home Base</p>
-            <p>30 Kingfield Ave, Ogunquit</p>
+            <p class="shore-label">Airbnb</p>
+            <p>Hold across from Key House.</p>
           </article>
           <article class="shore-card">
-            <p class="shore-label">Town</p>
-            <p>Town Center & Parking Lot</p>
-            <p>Perkins Cove & Parking Lot</p>
-          </article>
-          <article class="shore-card">
-            <p class="shore-label">Hotels</p>
-            <p>Dunes, Tides, Aspenquit & Cliff House</p>
+            <p class="shore-label">Getting Around</p>
+            <p>Golf cart taxi available around town.</p>
           </article>
         </div>
       </section>
@@ -192,28 +197,36 @@
     <script>
       const hotels = [
         {
-          name: "Beachmere Inn",
-          meta: "62 Beachmere Pl // about 5 minutes to venue",
+          name: "The Dunes",
+          meta: "Ogunquit, Maine",
           description:
-            "Luxury suites with ocean views, direct access to the Marginal Way, and a short walk to Ogunquit village.",
+            "Classic Ogunquit resort with cottage-style accommodations and river views.",
           image:
             "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1400&q=80"
         },
         {
-          name: "Juniper Hill Inn",
-          meta: "336 Main St // about 6 minutes to venue",
+          name: "The Tides",
+          meta: "Ogunquit, Maine",
           description:
-            "A relaxed stay just a six-minute walk from the beach with great recreation and relaxation options.",
+            "Beachfront hotel with easy access to Ogunquit Main Beach.",
           image:
             "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1400&q=80"
         },
         {
-          name: "Ogunquit Hotel & Suites",
-          meta: "154 US-1 // about 8 minutes to venue",
+          name: "Aspenquit",
+          meta: "Ogunquit, Maine",
           description:
-            "Spacious rooms minutes from Ogunquit Beach, perfect for families, couples, and extended stays.",
+            "Comfortable stay close to town center and local restaurants.",
           image:
             "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1400&q=80"
+        },
+        {
+          name: "Cliff House",
+          meta: "Ogunquit, Maine",
+          description:
+            "Luxury clifftop resort with ocean views and full spa.",
+          image:
+            "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1400&q=80"
         }
       ];
 
