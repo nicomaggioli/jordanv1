@@ -110,6 +110,7 @@ body {
   width: 46px;
   height: 46px;
   object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(10%) sepia(40%) saturate(1200%) hue-rotate(175deg) brightness(0.7);
 }
 
 .sr-only {
@@ -213,7 +214,7 @@ h1 {
   font-size: clamp(44px, 9vw, 104px);
   letter-spacing: 0.03em;
   line-height: 0.95;
-  color: #000000;
+  color: var(--ocean-950);
   white-space: nowrap;
   text-wrap: balance;
 }
@@ -489,21 +490,64 @@ h3 {
 }
 
 .map-panel {
-  min-height: 480px;
   overflow: hidden;
+  background: #d6eef8;
 }
 
 #ogt-map {
-  width: 100%;
-  height: 480px;
-}
-
-.map-panel iframe {
   display: block;
   width: 100%;
-  min-height: 360px;
-  border: 0;
-  filter: saturate(0.95) contrast(1.02) hue-rotate(12deg);
+  height: auto;
+}
+
+.pin-label {
+  font-family: "Manrope", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  fill: var(--ocean-950);
+  letter-spacing: 0.02em;
+}
+
+.pin-label-bold {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.pin-label-sm {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.river-label {
+  font-size: 12px;
+  font-weight: 700;
+  fill: #1178a1;
+  font-style: italic;
+}
+
+.ocean-label {
+  font-family: "Manrope", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  fill: #0b4d70;
+  letter-spacing: 0.25em;
+  font-style: italic;
+  opacity: 0.5;
+}
+
+.legend-text {
+  font-family: "Manrope", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--ocean-950);
+}
+
+.map-pin {
+  transition: transform 0.15s ease;
+}
+
+.map-pin:hover {
+  filter: brightness(1.1);
 }
 
 .shore-grid {
