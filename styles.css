@@ -488,29 +488,14 @@ h3 {
   color: #143852;
 }
 
-.location-legend {
-  padding: 24px;
-  margin-bottom: 18px;
-  text-align: center;
-  background: linear-gradient(180deg, rgba(242, 213, 168, 0.5), rgba(242, 213, 168, 0.3));
-}
-
-.location-legend .legend-title {
-  font-family: "Bebas Neue", "Arial Narrow", sans-serif;
-  font-size: 24px;
-  letter-spacing: 0.05em;
-  margin-bottom: 10px;
-}
-
-.location-legend p {
-  font-size: 14px;
-  line-height: 1.8;
-  color: var(--ocean-950);
-}
-
 .map-panel {
-  min-height: 360px;
+  min-height: 480px;
   overflow: hidden;
+}
+
+#ogt-map {
+  width: 100%;
+  height: 480px;
 }
 
 .map-panel iframe {
@@ -522,10 +507,10 @@ h3 {
 }
 
 .shore-grid {
-  margin-top: 18px;
+  margin-top: 24px;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .shore-card {

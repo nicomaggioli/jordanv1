@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jordan 50th Surf Session</title>
     <link rel="icon" type="image/png" href="assets/Jordan_Logo.png" />
-    <link rel="stylesheet" href="styles.css?v=6" />
+    <link rel="stylesheet" href="styles.css?v=7" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
     />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   </head>
   <body>
     <div class="ocean-layers" aria-hidden="true">
@@ -122,47 +124,9 @@
       </section>
 
       <section class="section reveal" id="location" aria-labelledby="location-title">
-        <h2 id="location-title">Location</h2>
-        <div class="section-panel location-legend">
-          <p class="legend-title">Map of OGT</p>
-          <p>Ogunquit Main Beach & Parking Lot</p>
-          <p>Ogunquit River</p>
-          <p>Footbridge Beach & Parking Lots</p>
-          <p>Charlie's on Beach</p>
-          <p>30 Kingfield Ave OGT</p>
-          <p>Town Center & Parking Lot</p>
-          <p>Perkins Cove & Parking Lot</p>
-          <p>4 Hotels: Dunes, Tides, Aspenquit & Cliff House</p>
-        </div>
+        <h2 id="location-title">Map of OGT</h2>
         <div class="section-panel map-panel">
-          <iframe
-            title="Map of Ogunquit, Maine"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11588.!2d-70.5967!3d43.2489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cb29e1e0a2db2e7%3A0x6e1c5f5e25a7fd26!2sOgunquit%2C%20ME!5e0!3m2!1sen!2sus!4v1708300800000!5m2!1sen!2sus"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </div>
-        <div class="shore-grid">
-          <article class="shore-card">
-            <p class="shore-label">Getting Here</p>
-            <p>Drive with a clear drop-off point at the house.</p>
-          </article>
-          <article class="shore-card">
-            <p class="shore-label">Uber</p>
-            <p>Rides available from Key House and around town.</p>
-          </article>
-          <article class="shore-card">
-            <p class="shore-label">OGT Lots</p>
-            <p>Main Beach, Footbridge & Perkins Cove all have lots.</p>
-          </article>
-          <article class="shore-card">
-            <p class="shore-label">Airbnb</p>
-            <p>Hold across from Key House.</p>
-          </article>
-          <article class="shore-card">
-            <p class="shore-label">Getting Around</p>
-            <p>Golf cart taxi available around town.</p>
-          </article>
+          <div id="ogt-map"></div>
         </div>
       </section>
 
@@ -333,6 +297,58 @@
       applyStaticWidowFix();
       renderHotel();
       window.setInterval(advanceSlide, 4000);
+
+      // ---- Leaflet Map with Pins ----
+      const map = L.map('ogt-map', { scrollWheelZoom: false }).setView([43.2490, -70.5920], 14);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
+        maxZoom: 18
+      }).addTo(map);
+
+      const pinColor = (color) => `
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="40" viewBox="0 0 28 40">
+          <path d="M14 0C6.3 0 0 6.3 0 14c0 10.5 14 26 14 26s14-15.5 14-26C28 6.3 21.7 0 14 0z" fill="${color}" stroke="#052036" stroke-width="1.5"/>
+          <circle cx="14" cy="13" r="5.5" fill="white"/>
+        </svg>`;
+
+      const makeIcon = (color) => L.divIcon({
+        html: pinColor(color),
+        iconSize: [28, 40],
+        iconAnchor: [14, 40],
+        popupAnchor: [0, -36],
+        className: ''
+      });
+
+      const orange = makeIcon('#ff9152');
+      const teal = makeIcon('#4ad1cf');
+      const blue = makeIcon('#1178a1');
+      const sand = makeIcon('#f2d5a8');
+
+      const pins = [
+        { lat: 43.2472, lng: -70.5893, label: 'Ogunquit Main Beach & Parking Lot', icon: orange },
+        { lat: 43.2520, lng: -70.5880, label: 'Ogunquit River', icon: teal },
+        { lat: 43.2555, lng: -70.5855, label: 'Footbridge Beach & Parking Lots', icon: orange },
+        { lat: 43.2478, lng: -70.5905, label: "Charlie's on Beach", icon: sand },
+        { lat: 43.2492, lng: -70.6030, label: '30 Kingfield Ave — Home Base', icon: orange },
+        { lat: 43.2510, lng: -70.5960, label: 'Town Center & Parking Lot', icon: blue },
+        { lat: 43.2370, lng: -70.5870, label: 'Perkins Cove & Parking Lot', icon: blue },
+        { lat: 43.2535, lng: -70.5935, label: 'The Dunes', icon: teal },
+        { lat: 43.2500, lng: -70.5910, label: 'The Tides', icon: teal },
+        { lat: 43.2515, lng: -70.5950, label: 'Aspenquit', icon: teal },
+        { lat: 43.2310, lng: -70.5780, label: 'Cliff House', icon: teal }
+      ];
+
+      const markers = [];
+      pins.forEach((p) => {
+        const m = L.marker([p.lat, p.lng], { icon: p.icon }).addTo(map).bindPopup(
+          `<strong style="font-family:Manrope,sans-serif;font-size:13px">${p.label}</strong>`
+        );
+        markers.push(m);
+      });
+
+      // Fit map to show all markers
+      const group = L.featureGroup(markers);
+      map.fitBounds(group.getBounds().pad(0.15));
 
       // Hamburger Menu - Clean Implementation
       const hamburgerBtn = document.getElementById('hamburgerBtn');
