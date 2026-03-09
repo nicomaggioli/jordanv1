@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jordan 50th Surf Session</title>
     <link rel="icon" type="image/png" href="assets/Jordan_Logo.png" />
-    <link rel="stylesheet" href="styles.css?v=10" />
+    <link rel="stylesheet" href="styles.css?v=11" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
@@ -125,8 +125,14 @@
 
       <section class="section reveal" id="location" aria-labelledby="location-title">
         <h2 id="location-title">Map of OGT</h2>
-        <div class="section-panel map-panel">
+        <div class="map-wrap">
           <div id="ogt-map"></div>
+          <!-- Floating legend overlay -->
+          <div class="map-legend" id="mapLegend">
+            <p class="map-legend-head">Spots</p>
+            <ul class="map-legend-list" id="legendList"></ul>
+            <button class="map-legend-reset" id="legendReset" type="button">Show All</button>
+          </div>
         </div>
       </section>
 
@@ -298,76 +304,111 @@
       renderHotel();
       window.setInterval(advanceSlide, 4000);
 
-      // ---- OGT Map ----
+      // ---- OGT Map — Premium Interactive ----
       const map = L.map('ogt-map', {
         scrollWheelZoom: false,
         zoomControl: false,
-        attributionControl: false
-      }).setView([43.2460, -70.5920], 14);
+        attributionControl: false,
+        zoomSnap: 0.25,
+        zoomAnimation: true,
+        markerZoomAnimation: true
+      }).setView([43.2470, -70.5930], 15.25);
 
-      // CartoDB Voyager — clean, modern tiles
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      // Dark elegant tiles — Stadia Alidade Smooth Dark
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
         maxZoom: 19,
         subdomains: 'abcd'
       }).addTo(map);
 
-      // Minimal attribution bottom-right
-      L.control.attribution({ position: 'bottomright', prefix: false })
-        .addAttribution('CartoDB')
-        .addTo(map);
-
-      // Zoom control top-right
       L.control.zoom({ position: 'topright' }).addTo(map);
 
-      const pin = (color, size, letter) => {
-        const s = size || 36;
-        const half = s / 2;
-        const inner = letter
-          ? `<span style="font-size:${s * 0.33}px;font-weight:800;color:#052036;line-height:1">${letter}</span>`
-          : `<span style="width:${s * 0.28}px;height:${s * 0.28}px;background:white;border-radius:50%;display:block"></span>`;
+      // Marker factory
+      const makePin = (color, size, glyph, isHome) => {
+        const s = size || 32;
+        const pulse = isHome
+          ? `<span class="pin-pulse" style="--pulse-color:${color}"></span>` : '';
+        const inner = glyph
+          ? `<span class="pin-glyph" style="font-size:${s * 0.36}px">${glyph}</span>`
+          : `<span class="pin-dot"></span>`;
         return L.divIcon({
           className: 'ogt-marker',
-          html: `<div class="ogt-pin" style="--pin-color:${color};--pin-size:${s}px">${inner}</div>`,
-          iconSize: [s, s + 12],
-          iconAnchor: [half, s + 12],
-          popupAnchor: [0, -(s + 6)]
+          html: `${pulse}<div class="ogt-pin${isHome ? ' ogt-pin--home' : ''}" style="--c:${color};--s:${s}px">${inner}</div>`,
+          iconSize: [s + 8, s + 18],
+          iconAnchor: [(s + 8) / 2, s + 18],
+          popupAnchor: [0, -(s + 10)]
         });
       };
 
-      const popup = (name, sub) => {
-        let html = `<div class="ogt-popup"><strong>${name}</strong>`;
-        if (sub) html += `<span>${sub}</span>`;
-        html += `</div>`;
-        return html;
-      };
+      const makePopup = (name, sub, color) =>
+        `<div class="ogt-popup">
+          <i class="popup-accent" style="background:${color}"></i>
+          <div class="popup-body">
+            <strong>${name}</strong>
+            ${sub ? `<span>${sub}</span>` : ''}
+          </div>
+        </div>`;
 
       const spots = [
-        { lat: 43.2572, lng: -70.5888, name: 'Footbridge Beach', sub: 'Parking lots available', color: '#ff9152', size: 34 },
-        { lat: 43.2505, lng: -70.5903, name: 'Ogunquit Main Beach', sub: 'Main parking lot', color: '#ff9152', size: 38 },
-        { lat: 43.2525, lng: -70.5875, name: 'Ogunquit River', sub: 'Float from Footbridge to Main Beach', color: '#27a7ce', size: 30, letter: '~' },
-        { lat: 43.2497, lng: -70.5910, name: "Charlie's on Beach", sub: 'Lunch spot', color: '#f2d5a8', size: 30, letter: 'C' },
-        { lat: 43.2482, lng: -70.6002, name: '30 Kingfield Ave', sub: 'Home Base — The Party', color: '#ff9152', size: 44 },
-        { lat: 43.2515, lng: -70.5952, name: 'Town Center', sub: 'Parking lot', color: '#1178a1', size: 30, letter: 'P' },
-        { lat: 43.2380, lng: -70.5890, name: 'Perkins Cove', sub: 'Parking lot', color: '#1178a1', size: 30, letter: 'P' },
-        { lat: 43.2540, lng: -70.5932, name: 'The Dunes', sub: 'Hotel', color: '#4ad1cf', size: 28, letter: 'H' },
-        { lat: 43.2508, lng: -70.5925, name: 'The Tides', sub: 'Hotel', color: '#4ad1cf', size: 28, letter: 'H' },
-        { lat: 43.2490, lng: -70.5975, name: 'Aspenquit', sub: 'Hotel', color: '#4ad1cf', size: 28, letter: 'H' },
-        { lat: 43.2290, lng: -70.5795, name: 'Cliff House', sub: 'Hotel & Spa', color: '#4ad1cf', size: 28, letter: 'H' }
+        { lat: 43.2482, lng: -70.6002, name: '30 Kingfield Ave', sub: 'Home Base — The Party', color: '#ff9152', size: 42, home: true, cat: 'key' },
+        { lat: 43.2505, lng: -70.5903, name: 'Ogunquit Main Beach', sub: 'Main parking lot', color: '#ff9152', size: 32, cat: 'key' },
+        { lat: 43.2572, lng: -70.5888, name: 'Footbridge Beach', sub: 'Parking lots available', color: '#ff9152', size: 32, cat: 'key' },
+        { lat: 43.2525, lng: -70.5875, name: 'Ogunquit River', sub: 'Float: Footbridge → Main Beach', color: '#27a7ce', size: 28, glyph: '〰', cat: 'key' },
+        { lat: 43.2497, lng: -70.5910, name: "Charlie's on Beach", sub: 'Lunch spot', color: '#f2d5a8', size: 28, glyph: '✦', cat: 'eat' },
+        { lat: 43.2515, lng: -70.5952, name: 'Town Center', sub: 'Shops & parking', color: '#1178a1', size: 26, glyph: 'P', cat: 'town' },
+        { lat: 43.2380, lng: -70.5890, name: 'Perkins Cove', sub: 'Scenic walk & parking', color: '#1178a1', size: 26, glyph: 'P', cat: 'town' },
+        { lat: 43.2540, lng: -70.5932, name: 'The Dunes', sub: 'Waterfront cottages', color: '#4ad1cf', size: 26, glyph: 'H', cat: 'hotel' },
+        { lat: 43.2508, lng: -70.5925, name: 'Ogunquit Tides', sub: 'By Footbridge Beach', color: '#4ad1cf', size: 26, glyph: 'H', cat: 'hotel' },
+        { lat: 43.2490, lng: -70.5975, name: 'Meadowmere', sub: 'Near town center', color: '#4ad1cf', size: 26, glyph: 'H', cat: 'hotel' },
+        { lat: 43.2290, lng: -70.5795, name: 'Cliff House', sub: 'Clifftop resort & spa', color: '#4ad1cf', size: 26, glyph: 'H', cat: 'hotel' }
       ];
 
-      const markers = [];
-      spots.forEach((s) => {
+      const allMarkers = [];
+      spots.forEach((s, i) => {
         const m = L.marker([s.lat, s.lng], {
-          icon: pin(s.color, s.size, s.letter)
-        }).addTo(map).bindPopup(popup(s.name, s.sub), {
+          icon: makePin(s.color, s.size, s.glyph, s.home)
+        }).addTo(map).bindPopup(makePopup(s.name, s.sub, s.color), {
           className: 'ogt-popup-wrap',
           closeButton: false,
-          offset: [0, 0]
+          maxWidth: 240,
+          offset: [0, 4]
         });
-        markers.push(m);
+        m._spotIndex = i;
+        allMarkers.push(m);
       });
 
-      map.fitBounds(L.featureGroup(markers).getBounds().pad(0.12));
+      // Build interactive legend
+      const legendList = document.getElementById('legendList');
+      spots.forEach((s, i) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<i style="background:${s.color}"></i><span>${s.name}</span>`;
+        li.dataset.index = i;
+        li.addEventListener('click', () => {
+          const mk = allMarkers[i];
+          map.flyTo([s.lat, s.lng], 17, { duration: 0.8 });
+          setTimeout(() => mk.openPopup(), 500);
+          // Highlight active
+          legendList.querySelectorAll('li').forEach(l => l.classList.remove('is-active'));
+          li.classList.add('is-active');
+        });
+        legendList.appendChild(li);
+      });
+
+      // Show All reset
+      const allBounds = L.featureGroup(allMarkers).getBounds().pad(0.08);
+      document.getElementById('legendReset').addEventListener('click', () => {
+        map.flyToBounds(allBounds, { duration: 0.8 });
+        map.closePopup();
+        legendList.querySelectorAll('li').forEach(l => l.classList.remove('is-active'));
+      });
+
+      // Also open popup on marker click + sync legend
+      allMarkers.forEach((m) => {
+        m.on('click', () => {
+          legendList.querySelectorAll('li').forEach(l => l.classList.remove('is-active'));
+          const li = legendList.querySelector(`[data-index="${m._spotIndex}"]`);
+          if (li) li.classList.add('is-active');
+        });
+      });
 
 
       // Hamburger Menu - Clean Implementation
