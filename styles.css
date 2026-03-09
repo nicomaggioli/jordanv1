@@ -510,9 +510,8 @@ h3 {
 }
 
 .ogt-pin {
-  width: var(--s);
-  height: var(--s);
-  background: var(--c);
+  width: 30px;
+  height: 30px;
   border: 2.5px solid var(--ocean-950);
   border-radius: 50% 50% 50% 0;
   transform: rotate(-45deg);
@@ -527,33 +526,25 @@ h3 {
 }
 
 .ogt-pin:hover {
-  transform: rotate(-45deg) scale(1.2) translateY(-3px);
+  transform: rotate(-45deg) scale(1.18) translateY(-2px);
   box-shadow:
     0 8px 24px rgba(5, 32, 54, 0.3),
     0 2px 6px rgba(5, 32, 54, 0.15);
 }
 
 .ogt-pin--home {
-  border-width: 3px;
   box-shadow:
     0 3px 14px rgba(255, 145, 82, 0.4),
     0 1px 3px rgba(5, 32, 54, 0.12);
 }
 
-.pin-glyph {
-  transform: rotate(45deg);
-  font-family: "Manrope", sans-serif;
-  font-weight: 800;
-  color: var(--ocean-950);
-  line-height: 1;
-}
-
 .pin-dot {
   transform: rotate(45deg);
-  width: 30%;
-  height: 30%;
+  width: 10px;
+  height: 10px;
   background: white;
   border-radius: 50%;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
 }
 
 /* Pulsing beacon on Home Base */
@@ -561,12 +552,12 @@ h3 {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: calc(var(--s, 42px) * 2.4);
-  height: calc(var(--s, 42px) * 2.4);
-  margin-top: calc(var(--s, 42px) * -1.2);
-  margin-left: calc(var(--s, 42px) * -1.2);
+  width: 72px;
+  height: 72px;
+  margin-top: -36px;
+  margin-left: -36px;
   border-radius: 50%;
-  background: var(--pulse-color, #ff9152);
+  background: #ff9152;
   opacity: 0;
   pointer-events: none;
   animation: pinPulse 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
