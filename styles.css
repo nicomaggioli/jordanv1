@@ -805,16 +805,22 @@ h3 {
 }
 
 .shore-grid {
-  margin-top: 24px;
+  margin-top: 18px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
 }
 
 .shore-card {
   border: 2px solid var(--line);
-  padding: 16px;
-  background: linear-gradient(180deg, rgba(242, 213, 168, 0.42), rgba(255, 255, 255, 0.75));
+  border-right: none;
+  padding: 18px 16px;
+  background: linear-gradient(180deg, rgba(242, 213, 168, 0.25), rgba(255, 255, 255, 0.8));
+  text-align: center;
+}
+
+.shore-card:last-child {
+  border-right: 2px solid var(--line);
 }
 
 .shore-label {
@@ -825,10 +831,11 @@ h3 {
   color: var(--ocean-750);
 }
 
-.shore-card p:last-child {
-  margin-top: 7px;
-  font-size: 14px;
-  line-height: 1.5;
+.shore-card p:not(.shore-label) {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #163a57;
 }
 
 .lodging-panel {
