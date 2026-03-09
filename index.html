@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jordan 50th Surf Session</title>
     <link rel="icon" type="image/png" href="assets/Jordan_Logo.png" />
-    <link rel="stylesheet" href="styles.css?v=17" />
+    <link rel="stylesheet" href="styles.css?v=21" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
@@ -179,6 +179,7 @@
               <p class="lodging-name" id="lodging-name"></p>
               <p class="lodging-meta" id="lodging-meta"></p>
               <p class="lodging-description" id="lodging-description"></p>
+              <p class="lodging-offer" id="lodging-offer"></p>
             </div>
           </article>
 
@@ -188,6 +189,11 @@
             </svg>
           </button>
         </div>
+        <div class="lodging-rates" id="lodgingRates"></div>
+        <div class="lodging-mobile-nav" id="lodgingMobileNav">
+          <button type="button" data-dir="prev">← Prev</button>
+          <button type="button" data-dir="next">Next →</button>
+        </div>
       </section>
 
     </main>
@@ -195,36 +201,57 @@
     <script>
       const hotels = [
         {
-          name: "The Dunes on the Waterfront",
+          name: "The Dunes",
           meta: "Ogunquit, Maine",
-          description:
-            "Classic Ogunquit resort with cottage-style accommodations and river views.",
-          image:
-            "https://symphony.cdn.tambourine.com/the-dunes-on-the-waterfront/media/dunesonthewaterfront-homepage-intro-2-68756268b75c9.jpg"
-        },
-        {
-          name: "Ogunquit Tides Resort",
-          meta: "Ogunquit, Maine",
-          description:
-            "Ocean views right by Footbridge Beach with easy access to Main Beach.",
-          image:
-            "https://www.ogunquittides.com/wp-content/uploads/oceanviewtoogunquitbeach-home.jpg"
-        },
-        {
-          name: "Meadowmere Resort",
-          meta: "Ogunquit, Maine",
-          description:
-            "Full-service resort close to town center and local restaurants.",
-          image:
-            "https://image-tc.galaxy.tf/wijpeg-eyeb7owls1qommluk3f965zpv/meadowmereresort-87.jpg"
+          description: "Classic riverside cottages with rowboats and old-school Maine charm.",
+          image: "https://symphony.cdn.tambourine.com/the-dunes-on-the-waterfront/media/dunesonthewaterfront-homepage-intro-2-68756268b75c9.jpg",
+          offer: "Manager\u2019s Rate",
+          rateLabel: "Manager\u2019s Rate",
+          rates: [
+            { room: "One Bedroom Cottage", rate: "$855" },
+            { room: "2BR Waterfront Queen/Twin", rate: "$1,125" },
+            { room: "2BR Waterview King/Queen", rate: "$1,080" },
+            { room: "2BR Waterview Queens/Bunks", rate: "$945" }
+          ]
         },
         {
           name: "Cliff House",
           meta: "Cape Neddick, Maine",
-          description:
-            "Luxury clifftop resort with panoramic ocean views and full spa.",
-          image:
-            "https://www.cliffhousemaine.com/images/content/schema/aerial-3.jpg"
+          description: "Luxury clifftop resort with panoramic ocean views and full spa.",
+          image: "https://www.cliffhousemaine.com/images/content/schema/aerial-3.jpg",
+          offer: "10% Off Website Rates",
+          rateLabel: "June 12\u201314",
+          rates: [
+            { room: "King Room, Ocean View", rate: "$858/nt" },
+            { room: "Ledges, King, Ocean", rate: "$841/nt" },
+            { room: "Room, 2 King, Ocean", rate: "$885/nt" },
+            { room: "Premium King, Resort", rate: "$894/nt" },
+            { room: "Premium King, Ocean", rate: "$1,086/nt" },
+            { room: "Suite, Sunrise View", rate: "$1,936/nt" },
+            { room: "Suite, King", rate: "$1,708/nt" },
+            { room: "Suite, 1BR Ocean", rate: "$2,506/nt" },
+            { room: "Suite, 2BR Ocean", rate: "$3,003/nt" },
+            { room: "Suite, 2BR", rate: "$2,867/nt" }
+          ]
+        },
+        {
+          name: "Anchorage",
+          meta: "Ogunquit, Maine",
+          description: "Beachfront resort steps from Ogunquit Beach. Friends & family rate available.",
+          image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/1a/fb/e0/anchorage-by-the-sea.jpg",
+          offer: "Friends & Family Rate",
+          rateLabel: "June 12\u201314",
+          rates: [
+            { room: "Room, 2 Double", rate: "$398/nt" },
+            { room: "Room, 2 Double, Street", rate: "$420/nt" },
+            { room: "King Room", rate: "$452/nt" },
+            { room: "King Room, Courtyard", rate: "$452/nt" },
+            { room: "2 Double, Limit Ocean", rate: "$517/nt" },
+            { room: "2 Double, Partial Ocean", rate: "$538/nt" },
+            { room: "2 Queen, Limited Ocean", rate: "$538/nt" },
+            { room: "King Room, Partial Ocean", rate: "$549/nt" },
+            { room: "2 Queen, Partial Ocean", rate: "$549/nt" }
+          ]
         }
       ];
 
@@ -239,6 +266,8 @@
       const nameEl = document.getElementById('lodging-name');
       const metaEl = document.getElementById('lodging-meta');
       const descriptionEl = document.getElementById('lodging-description');
+      const offerEl = document.getElementById('lodging-offer');
+      const ratesEl = document.getElementById('lodgingRates');
 
       let hotelIndex = 0;
 
@@ -271,7 +300,21 @@
           setTextNoWidow(nameEl, hotel.name);
           setTextNoWidow(metaEl, hotel.meta);
           setTextNoWidow(descriptionEl, hotel.description);
+          offerEl.textContent = hotel.offer || '';
           imageEl.classList.add('is-visible');
+
+          // Render rates table
+          if (hotel.rates && hotel.rates.length && ratesEl) {
+            const label = hotel.rateLabel || 'Rate';
+            const rows = hotel.rates.map(r =>
+              `<div class="rate-row"><span class="rate-room">${r.room}</span><span class="rate-price">${r.rate}</span></div>`
+            ).join('');
+            ratesEl.innerHTML = `<div class="rate-head"><span>Room Type</span><span>${label}</span></div>${rows}`;
+            ratesEl.style.display = '';
+          } else if (ratesEl) {
+            ratesEl.innerHTML = '';
+            ratesEl.style.display = 'none';
+          }
         }, prefersReducedMotion ? 0 : 120);
       };
 
@@ -334,13 +377,20 @@
 
       // ---- OGT Map — Premium Interactive ----
       const map = L.map('ogt-map', {
-        scrollWheelZoom: false,
+        scrollWheelZoom: true,
         zoomControl: false,
         attributionControl: false,
         zoomSnap: 0.25,
+        zoomDelta: 0.5,
         zoomAnimation: true,
-        markerZoomAnimation: true
-      }).setView([43.2470, -70.5930], 15.25);
+        markerZoomAnimation: true,
+        wheelPxPerZoomLevel: 90,
+        doubleClickZoom: true,
+        dragging: true,
+        inertia: true,
+        inertiaDeceleration: 2000,
+        easeLinearity: 0.25
+      }).setView([43.2510, -70.5960], 15.75);
 
       // CartoDB Voyager — warm, detailed, light
       L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
@@ -395,6 +445,11 @@
           maxWidth: 300,
           minWidth: 200,
           offset: [0, 4]
+        }).bindTooltip(s.name, {
+          className: 'ogt-tooltip',
+          direction: 'top',
+          offset: [0, -(PIN_SIZE + 14)],
+          opacity: 1
         });
         m._spotIndex = i;
         allMarkers.push(m);
@@ -429,12 +484,49 @@
       // Also open popup on marker click + sync legend
       allMarkers.forEach((m) => {
         m.on('click', () => {
+          map.flyTo([spots[m._spotIndex].lat, spots[m._spotIndex].lng], 17, { duration: 0.8 });
           legendList.querySelectorAll('li').forEach(l => l.classList.remove('is-active'));
           const li = legendList.querySelector(`[data-index="${m._spotIndex}"]`);
           if (li) li.classList.add('is-active');
         });
       });
 
+      // Mobile lodging nav
+      const mobileNav = document.getElementById('lodgingMobileNav');
+      if (mobileNav) {
+        mobileNav.querySelectorAll('button').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            if (btn.dataset.dir === 'next') {
+              hotelIndex = (hotelIndex + 1) % hotels.length;
+            } else {
+              hotelIndex = (hotelIndex - 1 + hotels.length) % hotels.length;
+            }
+            renderHotel();
+          });
+        });
+      }
+
+      // Touch swipe on lodging card
+      const lodgingCard = document.getElementById('lodgingCard');
+      if (lodgingCard) {
+        let touchStartX = 0;
+        let touchEndX = 0;
+        lodgingCard.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        lodgingCard.addEventListener('touchend', (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          const diff = touchStartX - touchEndX;
+          if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+              hotelIndex = (hotelIndex + 1) % hotels.length;
+            } else {
+              hotelIndex = (hotelIndex - 1 + hotels.length) % hotels.length;
+            }
+            renderHotel();
+          }
+        }, { passive: true });
+      }
 
       // Hamburger Menu - Clean Implementation
       const hamburgerBtn = document.getElementById('hamburgerBtn');
