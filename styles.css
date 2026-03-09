@@ -883,7 +883,7 @@ h3 {
 
 .lodging-card {
   display: grid;
-  grid-template-columns: minmax(240px, 42%) minmax(0, 1fr);
+  grid-template-columns: minmax(220px, 36%) minmax(0, 1fr);
   min-height: 258px;
 }
 
