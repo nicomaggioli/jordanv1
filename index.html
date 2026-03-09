@@ -324,12 +324,10 @@
 
       // Marker factory — all same size, white dot, unique gradient
       const PIN_SIZE = 30;
-      const makePin = (gradient, isHome) => {
-        const pulse = isHome
-          ? `<span class="pin-pulse"></span>` : '';
+      const makePin = (gradient) => {
         return L.divIcon({
           className: 'ogt-marker',
-          html: `${pulse}<div class="ogt-pin${isHome ? ' ogt-pin--home' : ''}" style="background:${gradient}"><span class="pin-dot"></span></div>`,
+          html: `<div class="ogt-pin" style="background:${gradient}"><span class="pin-dot"></span></div>`,
           iconSize: [PIN_SIZE + 8, PIN_SIZE + 18],
           iconAnchor: [(PIN_SIZE + 8) / 2, PIN_SIZE + 18],
           popupAnchor: [0, -(PIN_SIZE + 10)]
@@ -362,7 +360,7 @@
       const allMarkers = [];
       spots.forEach((s, i) => {
         const m = L.marker([s.lat, s.lng], {
-          icon: makePin(s.grad, s.home)
+          icon: makePin(s.grad)
         }).addTo(map).bindPopup(makePopup(s.name, s.sub, s.dot), {
           className: 'ogt-popup-wrap',
           closeButton: false,
