@@ -491,7 +491,7 @@ h3 {
 
 .map-panel {
   overflow: hidden;
-  background: #d6eef8;
+  background: #b8dff0;
 }
 
 #ogt-map {
@@ -500,42 +500,85 @@ h3 {
   height: auto;
 }
 
-.pin-label {
+.map-label {
   font-family: "Manrope", sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   fill: var(--ocean-950);
-  letter-spacing: 0.02em;
 }
 
-.pin-label-bold {
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.pin-label-sm {
-  font-size: 10px;
+.map-label-sm {
+  font-family: "Manrope", sans-serif;
+  font-size: 11px;
   font-weight: 600;
+  fill: var(--ocean-950);
 }
 
-.river-label {
-  font-size: 12px;
-  font-weight: 700;
+.map-label-home {
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  fill: var(--ocean-950);
+}
+
+.map-label-tag {
+  font-family: "Manrope", sans-serif;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  fill: #ff9152;
+}
+
+.map-label-hotel {
+  font-family: "Manrope", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  fill: #0b4d70;
+}
+
+.map-river-label {
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
   fill: #1178a1;
   font-style: italic;
+  letter-spacing: 0.06em;
 }
 
-.ocean-label {
+.map-trail-label {
   font-family: "Manrope", sans-serif;
-  font-size: 18px;
-  font-weight: 300;
-  fill: #0b4d70;
-  letter-spacing: 0.25em;
+  font-size: 10px;
+  font-weight: 500;
+  fill: #8a8274;
   font-style: italic;
-  opacity: 0.5;
+  letter-spacing: 0.08em;
 }
 
-.legend-text {
+.map-road-label {
+  font-family: "Manrope", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  fill: #a09888;
+  letter-spacing: 0.06em;
+}
+
+.map-ocean-label {
+  font-family: "Bebas Neue", "Arial Narrow", sans-serif;
+  font-size: 28px;
+  fill: #3d8fad;
+  letter-spacing: 0.2em;
+  opacity: 0.35;
+}
+
+.map-legend-title {
+  font-family: "Manrope", sans-serif;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  fill: var(--ocean-750);
+}
+
+.map-legend-text {
   font-family: "Manrope", sans-serif;
   font-size: 11px;
   font-weight: 600;
@@ -543,11 +586,11 @@ h3 {
 }
 
 .map-pin {
-  transition: transform 0.15s ease;
+  cursor: pointer;
 }
 
 .map-pin:hover {
-  filter: brightness(1.1);
+  filter: brightness(1.15);
 }
 
 .shore-grid {
