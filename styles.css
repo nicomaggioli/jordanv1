@@ -1404,9 +1404,10 @@ h3 {
     color: var(--sun);
   }
 
-  .menu-rsvp {
+  .menu .menu-rsvp {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 28px;
     padding: 16px 32px;
     background: var(--sun);
@@ -1419,9 +1420,10 @@ h3 {
     text-decoration: none;
     border: 2px solid var(--ocean-950);
     text-align: center;
+    border-bottom: 2px solid var(--ocean-950);
   }
 
-  .menu-rsvp::after {
+  .menu .menu-rsvp::after {
     display: none;
   }
 
