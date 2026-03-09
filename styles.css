@@ -493,8 +493,7 @@ h3 {
 .map-wrap {
   position: relative;
   border: 2px solid var(--line-strong);
-  border-radius: 6px;
-  box-shadow: 0 16px 48px rgba(3, 27, 47, 0.12), 0 2px 8px rgba(3, 27, 47, 0.06);
+  box-shadow: 0 12px 36px rgba(3, 27, 47, 0.15);
   overflow: hidden;
   background: #f8f6f2;
 }
@@ -581,8 +580,9 @@ h3 {
 /* ---- Popups ---- */
 .ogt-popup-wrap .leaflet-popup-content-wrapper {
   background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 12px 40px rgba(5, 32, 54, 0.18), 0 0 0 1px rgba(5, 32, 54, 0.06);
+  border-radius: 0;
+  border: 2px solid var(--line-strong);
+  box-shadow: 0 8px 28px rgba(5, 32, 54, 0.18);
   padding: 0;
   overflow: hidden;
 }
@@ -593,8 +593,8 @@ h3 {
 
 .ogt-popup-wrap .leaflet-popup-tip {
   background: #fff;
-  border: none;
-  box-shadow: 0 4px 12px rgba(5, 32, 54, 0.1);
+  border: 1px solid rgba(8, 33, 54, 0.3);
+  box-shadow: none;
 }
 
 .ogt-popup {
@@ -626,37 +626,37 @@ h3 {
 
 .ogt-popup span {
   font-family: "Manrope", sans-serif;
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 500;
-  color: var(--ocean-750);
-  letter-spacing: 0.01em;
-  line-height: 1.35;
+  color: #3d5a6e;
+  line-height: 1.45;
 }
 
 /* ---- Floating Legend ---- */
 .map-legend {
   position: absolute;
-  top: 16px;
-  left: 16px;
+  top: 14px;
+  left: 14px;
   z-index: 1000;
   width: 220px;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(20px) saturate(1.6);
-  -webkit-backdrop-filter: blur(20px) saturate(1.6);
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(5, 32, 54, 0.14), 0 0 0 1px rgba(5, 32, 54, 0.06);
-  padding: 16px 0 12px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 2px solid var(--line);
+  box-shadow: 0 8px 24px rgba(5, 32, 54, 0.12);
+  padding: 14px 0 10px;
   overflow: hidden;
 }
 
 .map-legend-head {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 18px;
-  letter-spacing: 0.1em;
+  font-family: "Manrope", sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
   color: var(--ocean-750);
   text-transform: uppercase;
-  padding: 0 18px 12px;
-  border-bottom: 1px solid rgba(5, 32, 54, 0.08);
+  padding: 0 16px 10px;
+  border-bottom: 2px solid var(--line);
 }
 
 .map-legend-list {
@@ -671,7 +671,7 @@ h3 {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 9px 18px;
+  padding: 8px 16px;
   cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease;
   border-left: 3px solid transparent;
@@ -687,11 +687,11 @@ h3 {
 }
 
 .map-legend-list li i {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   flex-shrink: 0;
-  border: 1.5px solid rgba(5, 32, 54, 0.15);
+  border: 1.5px solid var(--ocean-950);
 }
 
 .map-legend-list li span {
@@ -710,17 +710,16 @@ h3 {
 
 .map-legend-reset {
   display: block;
-  width: calc(100% - 36px);
-  margin: 8px 18px 4px;
-  padding: 9px;
-  border: 1.5px solid var(--line);
-  border-radius: 8px;
+  width: calc(100% - 32px);
+  margin: 8px 16px 4px;
+  padding: 8px;
+  border: 2px solid var(--line);
   background: transparent;
   color: var(--ocean-750);
   font-family: "Manrope", sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
@@ -734,27 +733,26 @@ h3 {
 
 /* ---- Leaflet control overrides ---- */
 .leaflet-control-zoom {
-  border: none !important;
-  box-shadow: 0 4px 16px rgba(5, 32, 54, 0.12) !important;
-  border-radius: 10px !important;
+  border: 2px solid var(--line) !important;
+  border-radius: 0 !important;
+  box-shadow: 0 4px 12px rgba(5, 32, 54, 0.1) !important;
   overflow: hidden;
 }
 
 .leaflet-control-zoom a {
-  background: rgba(255, 255, 255, 0.92) !important;
-  backdrop-filter: blur(8px) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   color: var(--ocean-950) !important;
-  border-color: rgba(5, 32, 54, 0.06) !important;
+  border-color: var(--line) !important;
   font-weight: 400 !important;
-  font-size: 18px !important;
-  width: 38px !important;
-  height: 38px !important;
-  line-height: 38px !important;
+  font-size: 16px !important;
+  width: 34px !important;
+  height: 34px !important;
+  line-height: 34px !important;
   transition: background 0.15s ease !important;
 }
 
 .leaflet-control-zoom a:hover {
-  background: #fff !important;
+  background: var(--foam) !important;
 }
 
 .leaflet-control-attribution {

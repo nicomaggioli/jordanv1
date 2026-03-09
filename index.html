@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jordan 50th Surf Session</title>
     <link rel="icon" type="image/png" href="assets/Jordan_Logo.png" />
-    <link rel="stylesheet" href="styles.css?v=13" />
+    <link rel="stylesheet" href="styles.css?v=14" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
@@ -349,17 +349,17 @@
         </div>`;
 
       const spots = [
-        { lat: 43.2482, lng: -70.6002, name: '30 Kingfield Ave', sub: 'Home Base — The Party', color: '#ff9152', size: 42, home: true, cat: 'key' },
-        { lat: 43.2505, lng: -70.5903, name: 'Ogunquit Main Beach', sub: 'Main parking lot', color: '#ff9152', size: 32, cat: 'key' },
-        { lat: 43.2572, lng: -70.5888, name: 'Footbridge Beach', sub: 'Parking lots available', color: '#ff9152', size: 32, cat: 'key' },
-        { lat: 43.2525, lng: -70.5875, name: 'Ogunquit River', sub: 'Float: Footbridge → Main Beach', color: '#27a7ce', size: 28, glyph: '〰', cat: 'key' },
-        { lat: 43.2497, lng: -70.5910, name: "Charlie's on Beach", sub: 'Lunch spot', color: '#f2d5a8', size: 28, glyph: '✦', cat: 'eat' },
-        { lat: 43.2515, lng: -70.5952, name: 'Town Center', sub: 'Shops & parking', color: '#1178a1', size: 26, glyph: 'P', cat: 'town' },
-        { lat: 43.2380, lng: -70.5890, name: 'Perkins Cove', sub: 'Scenic walk & parking', color: '#1178a1', size: 26, glyph: 'P', cat: 'town' },
-        { lat: 43.2540, lng: -70.5932, name: 'The Dunes', sub: 'Waterfront cottages', color: '#4ad1cf', size: 26, glyph: 'H', cat: 'hotel' },
-        { lat: 43.2508, lng: -70.5925, name: 'Ogunquit Tides', sub: 'By Footbridge Beach', color: '#4ad1cf', size: 26, glyph: 'H', cat: 'hotel' },
-        { lat: 43.2490, lng: -70.5975, name: 'Meadowmere', sub: 'Near town center', color: '#4ad1cf', size: 26, glyph: 'H', cat: 'hotel' },
-        { lat: 43.2290, lng: -70.5795, name: 'Cliff House', sub: 'Clifftop resort & spa', color: '#4ad1cf', size: 26, glyph: 'H', cat: 'hotel' }
+        { lat: 43.2574, lng: -70.5986, name: '30 Kingfield Ave', sub: 'The house. Happy hour, dinner, DJ — everything happens here.', color: '#ff9152', size: 42, home: true, cat: 'key' },
+        { lat: 43.2504, lng: -70.5950, name: 'Ogunquit Main Beach', sub: '3.5 miles of white sand. Beach day starts at 9 AM. Paid parking on Beach St.', color: '#ff9152', size: 32, cat: 'key' },
+        { lat: 43.2644, lng: -70.5977, name: 'Footbridge Beach', sub: 'Quieter north end. Cross the iconic footbridge to get there. Free overflow lot.', color: '#ff9152', size: 32, cat: 'key' },
+        { lat: 43.2580, lng: -70.5940, name: 'Ogunquit River', sub: 'Lazy float from Footbridge down to Main Beach. Bring a tube, grab a current.', color: '#27a7ce', size: 28, glyph: '〰', cat: 'key' },
+        { lat: 43.2504, lng: -70.5949, name: "Charlie's on Beach", sub: 'Fried clams, lobster rolls, cold beer. Right on Beach St — 1 PM lunch stop.', color: '#f2d5a8', size: 28, glyph: '✦', cat: 'eat' },
+        { lat: 43.2488, lng: -70.5999, name: 'Town Center', sub: 'Ogunquit Square — shops, galleries, ice cream. Public lot on Shore Rd.', color: '#1178a1', size: 26, glyph: 'P', cat: 'town' },
+        { lat: 43.2378, lng: -70.5926, name: 'Perkins Cove', sub: 'Walk the Marginal Way to get here. Harbor, galleries, cocktails at sunset.', color: '#1178a1', size: 26, glyph: 'P', cat: 'town' },
+        { lat: 43.2634, lng: -70.5979, name: 'The Dunes', sub: 'Classic riverside cottages with rowboats. Old-school Maine charm.', color: '#4ad1cf', size: 26, glyph: 'H', cat: 'hotel' },
+        { lat: 43.2603, lng: -70.5988, name: 'Ogunquit Tides', sub: 'Right on Main St near Footbridge Beach. Pool, clean rooms, solid value.', color: '#4ad1cf', size: 26, glyph: 'H', cat: 'hotel' },
+        { lat: 43.2419, lng: -70.6021, name: 'Meadowmere', sub: 'Full resort on Main St. Indoor/outdoor pools, spa, walkable to town.', color: '#4ad1cf', size: 26, glyph: 'H', cat: 'hotel' },
+        { lat: 43.2191, lng: -70.5835, name: 'Cliff House', sub: 'Luxury clifftop resort in Cape Neddick. Ocean-view spa, fine dining, the works.', color: '#4ad1cf', size: 26, glyph: 'H', cat: 'hotel' }
       ];
 
       const allMarkers = [];
@@ -369,7 +369,8 @@
         }).addTo(map).bindPopup(makePopup(s.name, s.sub, s.color), {
           className: 'ogt-popup-wrap',
           closeButton: false,
-          maxWidth: 240,
+          maxWidth: 300,
+          minWidth: 200,
           offset: [0, 4]
         });
         m._spotIndex = i;
