@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Jordan 50th Surf Session</title>
+    <title>Jordan's 50th — Ogunquit, Maine</title>
     <link rel="icon" type="image/png" href="assets/Jordan_Logo.png" />
-    <link rel="stylesheet" href="styles.css?v=26" />
+    <link rel="stylesheet" href="styles.css?v=27" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
@@ -19,6 +19,73 @@
       <div class="wave wave-back"></div>
       <div class="wave wave-mid"></div>
       <div class="wave wave-front"></div>
+    </div>
+
+    <!-- RSVP Modal -->
+    <div class="rsvp-overlay" id="rsvpOverlay">
+      <div class="rsvp-modal">
+        <button class="rsvp-close" id="rsvpClose" type="button" aria-label="Close RSVP">&times;</button>
+        <h3 class="rsvp-title">RSVP</h3>
+        <p class="rsvp-subtitle">Jordan's 50th — June 13, 2026</p>
+
+        <form class="rsvp-form" id="rsvpForm" action="https://formsubmit.co/rsvp@sproutstudios.com" method="POST">
+          <input type="hidden" name="_subject" value="Jordan's 50th RSVP" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="text" name="_honey" style="display:none" />
+
+          <div class="rsvp-field">
+            <label for="rsvp-name">Your Name</label>
+            <input type="text" id="rsvp-name" name="Name" required placeholder="First & Last" />
+          </div>
+
+          <div class="rsvp-field">
+            <label for="rsvp-email">Email</label>
+            <input type="email" id="rsvp-email" name="Email" required placeholder="you@email.com" />
+          </div>
+
+          <div class="rsvp-field">
+            <label>Will you be attending?</label>
+            <div class="rsvp-radio-group">
+              <label class="rsvp-radio"><input type="radio" name="Attending" value="Yes" required /><span>Yes, I'll be there!</span></label>
+              <label class="rsvp-radio"><input type="radio" name="Attending" value="No" /><span>Sorry, can't make it</span></label>
+            </div>
+          </div>
+
+          <div class="rsvp-field">
+            <label>Bringing a significant other?</label>
+            <div class="rsvp-radio-group">
+              <label class="rsvp-radio"><input type="radio" name="Plus One" value="Yes" required /><span>Yes</span></label>
+              <label class="rsvp-radio"><input type="radio" name="Plus One" value="No" /><span>No, just me</span></label>
+            </div>
+          </div>
+
+          <div class="rsvp-field" id="plusOneName" style="display:none">
+            <label for="rsvp-plus-name">Their Name</label>
+            <input type="text" id="rsvp-plus-name" name="Plus One Name" placeholder="Guest name" />
+          </div>
+
+          <div class="rsvp-field">
+            <label>Will you attend the Birthday BBQ dinner?</label>
+            <div class="rsvp-radio-group">
+              <label class="rsvp-radio"><input type="radio" name="Dinner" value="Yes" required /><span>Yes</span></label>
+              <label class="rsvp-radio"><input type="radio" name="Dinner" value="No" /><span>No</span></label>
+            </div>
+          </div>
+
+          <div class="rsvp-field">
+            <label for="rsvp-notes">Notes / Dietary Restrictions</label>
+            <textarea id="rsvp-notes" name="Notes" rows="3" placeholder="Anything we should know?"></textarea>
+          </div>
+
+          <button type="submit" class="rsvp-submit">Send RSVP</button>
+        </form>
+
+        <div class="rsvp-success" id="rsvpSuccess" style="display:none">
+          <p class="rsvp-success-icon">&#127881;</p>
+          <p class="rsvp-success-msg">You're all set! We'll see you in Ogunquit.</p>
+        </div>
+      </div>
     </div>
 
     <main class="site">
@@ -39,19 +106,20 @@
           <a href="#agenda">Agenda</a>
           <a href="#location">Location</a>
           <a href="#lodging">Lodging</a>
-          <a class="menu-rsvp" href="mailto:rsvp@sproutstudios.com?subject=Jordan%2050th%20RSVP">RSVP</a>
+          <a class="menu-rsvp" href="#" data-rsvp>RSVP</a>
         </nav>
 
-        <a class="header-rsvp desktop-only" href="mailto:rsvp@sproutstudios.com?subject=Jordan%2050th%20RSVP">RSVP</a>
+        <a class="header-rsvp desktop-only" href="#" data-rsvp>RSVP</a>
       </header>
 
       <section class="hero panel reveal" id="overview" aria-label="Overview">
         <div class="hero-copy">
-          <h1 id="top">Jordans 50th</h1>
+          <h1 id="top">Jordan's 50th</h1>
           <p class="lead">
-            Jordan turns 50 this June, and we are gathering friends, family, and longtime collaborators for a warm,
-            high-energy night at Sprout Studios. Think sunset hangs, good food, thoughtful toasts, and a dance floor that
-            carries the wave through the evening.
+            Come celebrate Jordan turning 50 in his favorite place—Ogunquit, Maine. Over the years, this has become his happy place: a spot to unwind, recharge, and enjoy the simple things—beach days, ocean air, and great company. It felt like the perfect place to mark this milestone.
+          </p>
+          <p class="lead" style="margin-top:12px">
+            We'll kick things off with a relaxing day at the beach, followed by a birthday bash with great food, music, and plenty of fun. It's going to be a laid-back, adults-only celebration filled with good vibes, laughter, and unforgettable memories.
           </p>
 
           <div class="fact-grid" aria-label="Key details">
@@ -61,7 +129,7 @@
             </article>
             <article class="fact-item">
               <p class="fact-label">Time</p>
-              <p class="fact-value">6 PM till Late</p>
+              <p class="fact-value">10:00 AM till Late</p>
             </article>
             <article class="fact-item">
               <p class="fact-label">Location</p>
@@ -72,53 +140,41 @@
         </div>
 
         <div class="hero-visual">
-          <img class="hero-slide active"
-            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80"
-            alt="Ocean wave at sunset"
-          />
-          <img class="hero-slide"
-            src="https://images.unsplash.com/photo-1476673160081-cf065607f449?auto=format&fit=crop&w=1600&q=80"
-            alt="Golden sunset over the ocean"
-          />
-          <img class="hero-slide"
-            src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1600&q=80"
-            alt="Waves crashing at sunset"
-          />
-          <img class="hero-slide"
-            src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?auto=format&fit=crop&w=1600&q=80"
-            alt="Tropical beach at golden hour"
-          />
+          <img class="hero-slide active" src="assets/JBN1.jpg" alt="Jordan as a kid" />
+          <img class="hero-slide" src="assets/JBN2.jpg" alt="Young Jordan in the pool" />
+          <img class="hero-slide" src="assets/JBN3.jpg" alt="Jordan at a birthday party" />
+          <img class="hero-slide" src="assets/JBN4.jpg" alt="Jordan at graduation" />
+          <img class="hero-slide" src="assets/JBN5.jpg" alt="Jordan with family by the water" />
+          <img class="hero-slide" src="assets/JBN6.jpg" alt="Jordan and family outdoors" />
+          <img class="hero-slide" src="assets/JBN7.jpg" alt="Jordan with the crew" />
           <p class="hero-date">Save the Date // June 13, 2026</p>
-          <a class="board-tag" href="mailto:rsvp@sproutstudios.com?subject=Jordan%2050th%20RSVP">RSVP</a>
+          <a class="board-tag" href="#" data-rsvp>RSVP</a>
         </div>
       </section>
 
       <section class="section reveal" id="agenda" aria-labelledby="agenda-title">
         <h2 id="agenda-title">Agenda</h2>
+        <p class="section-note">Whether you can make it for some or all of Jordan's 50th, we have a full lineup to keep you busy and well fed and plenty of good times!</p>
         <div class="section-panel agenda-panel">
           <article class="agenda-item">
-            <p class="agenda-time">9:00 AM</p>
-            <p class="agenda-copy">Beachday — Ogunquit Main Beach</p>
+            <p class="agenda-time">10:00 AM</p>
+            <p class="agenda-copy">Beach Day — Ogunquit Main Beach</p>
           </article>
           <article class="agenda-item">
             <p class="agenda-time">12:00 PM</p>
-            <p class="agenda-copy">Ogunquit Riverfloat — Footbridge to Main Beach</p>
+            <p class="agenda-copy">Lunch — Ogunquit Main Beach (multiple options)</p>
           </article>
           <article class="agenda-item">
-            <p class="agenda-time">1:00 PM</p>
-            <p class="agenda-copy">Lunch @ Charlie's on Beach</p>
+            <p class="agenda-time">4:30 PM</p>
+            <p class="agenda-copy">Happy Hour — 30 Kingfield</p>
           </article>
           <article class="agenda-item">
-            <p class="agenda-time">5:00 PM</p>
-            <p class="agenda-copy">Happy Hour</p>
-          </article>
-          <article class="agenda-item">
-            <p class="agenda-time">7:00 PM</p>
-            <p class="agenda-copy">Dinner — Brazilian BBQ</p>
+            <p class="agenda-time">6:30 PM</p>
+            <p class="agenda-copy">Birthday BBQ — 30 Kingfield</p>
           </article>
           <article class="agenda-item">
             <p class="agenda-time">9:00 PM</p>
-            <p class="agenda-copy">DJ — 90's Hip Hop, Funk & Soul</p>
+            <p class="agenda-copy">DJ & Dancing — 90's Hip Hop — 30 Kingfield</p>
           </article>
         </div>
       </section>
@@ -127,7 +183,6 @@
         <h2 id="location-title">Map of OGT</h2>
         <div class="map-wrap">
           <div id="ogt-map"></div>
-          <!-- Floating legend overlay -->
           <div class="map-legend" id="mapLegend">
             <p class="map-legend-head">Spots</p>
             <ul class="map-legend-list" id="legendList"></ul>
@@ -144,15 +199,12 @@
           <article class="shore-card">
             <p class="shore-label">Parking</p>
             <p>Multiple public lots available for the day</p>
-          </article>
-          <article class="shore-card">
-            <p class="shore-label">OGT Lots</p>
-            <p>Hotel</p>
-            <p>Field Across from my House</p>
+            <p>Hotel lots</p>
+            <p>Field across from my house</p>
           </article>
           <article class="shore-card">
             <p class="shore-label">Arrival</p>
-            <p>Aim for 9 AM and enjoy the full day</p>
+            <p>Aim for 10 AM and enjoy the full day</p>
           </article>
           <article class="shore-card">
             <p class="shore-label">Getting Around</p>
@@ -160,6 +212,13 @@
             <p>Biking</p>
             <p>Trolley</p>
             <p>Golf Cart Taxi</p>
+          </article>
+          <article class="shore-card">
+            <p class="shore-label">Things to Do</p>
+            <p>Beach</p>
+            <p>Walk The Marginal Way</p>
+            <p>Shop OGT's Quaint Stores</p>
+            <p>Eat, Drink & Celebrate</p>
           </article>
         </div>
       </section>
@@ -191,8 +250,8 @@
         </div>
         <div class="lodging-rates" id="lodgingRates"></div>
         <div class="lodging-mobile-nav" id="lodgingMobileNav">
-          <button type="button" data-dir="prev">← Prev</button>
-          <button type="button" data-dir="next">Next →</button>
+          <button type="button" data-dir="prev">&larr; Prev</button>
+          <button type="button" data-dir="next">Next &rarr;</button>
         </div>
       </section>
 
@@ -203,7 +262,7 @@
         {
           name: "The Dunes",
           meta: "Ogunquit, Maine",
-          description: "Classic riverside cottages with rowboats and old-school Maine charm.",
+          description: "Classic riverside cottages with rowboats and old-school Maine charm. Right in front of my house — you can't get any closer to the party.",
           image: "https://symphony.cdn.tambourine.com/the-dunes-on-the-waterfront/media/dunesonthewaterfront-homepage-intro-2-68756268b75c9.jpg",
           offer: "Manager\u2019s Rate",
           rateLabel: "Manager\u2019s Rate",
@@ -212,6 +271,31 @@
             { room: "2BR Waterfront Queen/Twin", rate: "$1,125" },
             { room: "2BR Waterview King/Queen", rate: "$1,080" },
             { room: "2BR Waterview Queens/Bunks", rate: "$945" }
+          ]
+        },
+        {
+          name: "The Tides",
+          meta: "Ogunquit, Maine",
+          description: "Waterfront resort beside Footbridge Beach with indoor and outdoor pools. Just steps away from the house — super convenient.",
+          image: "https://www.ogunquittides.com/resourcefiles/mainimages/702x408/702x408-ogunquit-tides-aerial-5.jpg",
+          offer: "Check for Discounted Rate",
+          rateLabel: "June 12\u201314",
+          rates: [
+            { room: "Standard Room", rate: "~$200\u2013350/nt" },
+            { room: "Efficiency", rate: "~$250\u2013400/nt" },
+            { room: "Suite", rate: "~$350\u2013500/nt" }
+          ]
+        },
+        {
+          name: "Aspinquid Resort",
+          meta: "Ogunquit, Maine",
+          description: "Oceanfront resort just 500 feet from Ogunquit Beach. Every room faces the water with spectacular views. Pool, pickleball, and walkable to everything.",
+          image: "https://www.ogunquitbeach.com/wp-content/uploads/2025/01/ASP_Autumn_102524-2-1-scaled.webp",
+          offer: "Check for Discounted Rate",
+          rateLabel: "June 12\u201314",
+          rates: [
+            { room: "Ocean View Room", rate: "~$250\u2013400/nt" },
+            { room: "Premium Ocean View", rate: "~$300\u2013465/nt" }
           ]
         },
         {
@@ -238,7 +322,7 @@
           name: "Anchorage",
           meta: "Ogunquit, Maine",
           description: "Beachfront resort steps from Ogunquit Beach. Friends & family rate available.",
-          image: "https://image-tc.galaxy.tf/wipng-2opo8eit2z6aa3i3a3khzjt0o/stock-photos-2025-11-11t133549-950.png",
+          image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/c0/c5/d1/aerial-view.jpg?w=1600&h=-1&s=1",
           offer: "Friends & Family Rate",
           rateLabel: "June 12\u201314",
           rates: [
@@ -285,7 +369,7 @@
 
       const applyStaticWidowFix = () => {
         const staticTargets = document.querySelectorAll(
-          '.lead, .agenda-copy, .agenda-note, .shore-card p:last-child'
+          '.lead, .agenda-copy, .agenda-note, .shore-card p:last-child, .section-note'
         );
         staticTargets.forEach((el) => setTextNoWidow(el, el.textContent));
       };
@@ -303,7 +387,6 @@
           offerEl.textContent = hotel.offer || '';
           imageEl.classList.add('is-visible');
 
-          // Render rates table
           if (hotel.rates && hotel.rates.length && ratesEl) {
             const label = hotel.rateLabel || 'Rate';
             const rows = hotel.rates.map(r =>
@@ -375,7 +458,7 @@
       renderHotel();
       window.setInterval(advanceSlide, 4000);
 
-      // ---- OGT Map — Premium Interactive ----
+      // ---- OGT Map ----
       const map = L.map('ogt-map', {
         scrollWheelZoom: true,
         zoomControl: false,
@@ -392,7 +475,6 @@
         easeLinearity: 0.25
       }).setView([43.2510, -70.5960], 15.75);
 
-      // CartoDB Voyager — warm, detailed, light
       L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         maxZoom: 19,
         subdomains: 'abcd'
@@ -400,7 +482,6 @@
 
       L.control.zoom({ position: 'topright' }).addTo(map);
 
-      // Marker factory — all same size, white dot, unique gradient
       const PIN_SIZE = 30;
       const makePin = (gradient) => {
         return L.divIcon({
@@ -423,16 +504,17 @@
 
       const spots = [
         { lat: 43.2574, lng: -70.5986, name: '30 Kingfield Ave', sub: 'The house. Happy hour, dinner, DJ — everything happens here.', grad: 'linear-gradient(135deg, #ff9152, #e06b2a)', dot: '#ff9152', home: true },
-        { lat: 43.2504, lng: -70.5950, name: 'Ogunquit Main Beach', sub: '3.5 miles of white sand. Beach day starts at 9 AM. Paid parking on Beach St.', grad: 'linear-gradient(135deg, #f7c948, #e0a815)', dot: '#f7c948' },
+        { lat: 43.2504, lng: -70.5950, name: 'Ogunquit Main Beach', sub: '3.5 miles of white sand. Beach day starts at 10 AM. Paid parking on Beach St.', grad: 'linear-gradient(135deg, #f7c948, #e0a815)', dot: '#f7c948' },
         { lat: 43.2644, lng: -70.5977, name: 'Footbridge Beach', sub: 'Quieter north end. Cross the iconic footbridge to get there. Free overflow lot.', grad: 'linear-gradient(135deg, #f2a65a, #d4863a)', dot: '#f2a65a' },
         { lat: 43.2580, lng: -70.5940, name: 'Ogunquit River', sub: 'Lazy float from Footbridge down to Main Beach. Bring a tube, grab a current.', grad: 'linear-gradient(135deg, #27a7ce, #1a7fa0)', dot: '#27a7ce' },
-        { lat: 43.2504, lng: -70.5949, name: "Charlie's on Beach", sub: 'Fried clams, lobster rolls, cold beer. Right on Beach St — 1 PM lunch stop.', grad: 'linear-gradient(135deg, #e8746a, #c4524a)', dot: '#e8746a' },
         { lat: 43.2488, lng: -70.5999, name: 'Town Center', sub: 'Ogunquit Square — shops, galleries, ice cream. Public lot on Shore Rd.', grad: 'linear-gradient(135deg, #1178a1, #0b5d80)', dot: '#1178a1' },
         { lat: 43.2378, lng: -70.5926, name: 'Perkins Cove', sub: 'Walk the Marginal Way to get here. Harbor, galleries, cocktails at sunset.', grad: 'linear-gradient(135deg, #7b68c4, #5a4a9e)', dot: '#7b68c4' },
         { lat: 43.2634, lng: -70.5979, name: 'The Dunes', sub: 'Classic riverside cottages with rowboats. Old-school Maine charm.', grad: 'linear-gradient(135deg, #4ad1cf, #2eb0ae)', dot: '#4ad1cf' },
-        { lat: 43.2603, lng: -70.5988, name: 'Ogunquit Tides', sub: 'Right on Main St near Footbridge Beach. Pool, clean rooms, solid value.', grad: 'linear-gradient(135deg, #5bbf8a, #3d9e6c)', dot: '#5bbf8a' },
+        { lat: 43.2603, lng: -70.5988, name: 'The Tides', sub: 'Waterfront resort beside Footbridge Beach. Indoor & outdoor pools.', grad: 'linear-gradient(135deg, #5bbf8a, #3d9e6c)', dot: '#5bbf8a' },
+        { lat: 43.2515, lng: -70.5935, name: 'Aspinquid Resort', sub: 'Oceanfront, 500 ft from Main Beach. Pool, pickleball, ocean views.', grad: 'linear-gradient(135deg, #e87da0, #c45a7c)', dot: '#e87da0' },
         { lat: 43.2419, lng: -70.6021, name: 'Meadowmere', sub: 'Full resort on Main St. Indoor/outdoor pools, spa, walkable to town.', grad: 'linear-gradient(135deg, #6a9fd8, #4a7eb8)', dot: '#6a9fd8' },
-        { lat: 43.2191, lng: -70.5835, name: 'Cliff House', sub: 'Luxury clifftop resort in Cape Neddick. Ocean-view spa, fine dining, the works.', grad: 'linear-gradient(135deg, #c47bc4, #a05aa0)', dot: '#c47bc4' }
+        { lat: 43.2191, lng: -70.5835, name: 'Cliff House', sub: 'Luxury clifftop resort in Cape Neddick. Ocean-view spa, fine dining, the works.', grad: 'linear-gradient(135deg, #c47bc4, #a05aa0)', dot: '#c47bc4' },
+        { lat: 43.2498, lng: -70.5970, name: 'Anchorage', sub: 'Beachfront resort steps from Ogunquit Beach. Friends & family rate.', grad: 'linear-gradient(135deg, #82b4d9, #5a92b8)', dot: '#82b4d9' }
       ];
 
       const allMarkers = [];
@@ -455,7 +537,6 @@
         allMarkers.push(m);
       });
 
-      // Build interactive legend
       const legendList = document.getElementById('legendList');
       spots.forEach((s, i) => {
         const li = document.createElement('li');
@@ -465,14 +546,12 @@
           const mk = allMarkers[i];
           map.flyTo([s.lat, s.lng], 17, { duration: 0.8 });
           setTimeout(() => mk.openPopup(), 500);
-          // Highlight active
           legendList.querySelectorAll('li').forEach(l => l.classList.remove('is-active'));
           li.classList.add('is-active');
         });
         legendList.appendChild(li);
       });
 
-      // Show All reset
       const allBounds = L.featureGroup(allMarkers).getBounds().pad(0.08);
       map.fitBounds(allBounds);
       document.getElementById('legendReset').addEventListener('click', () => {
@@ -481,7 +560,6 @@
         legendList.querySelectorAll('li').forEach(l => l.classList.remove('is-active'));
       });
 
-      // Also open popup on marker click + sync legend
       allMarkers.forEach((m) => {
         m.on('click', () => {
           map.flyTo([spots[m._spotIndex].lat, spots[m._spotIndex].lng], 17, { duration: 0.8 });
@@ -528,22 +606,20 @@
         }, { passive: true });
       }
 
-      // Hamburger Menu - Clean Implementation
+      // Hamburger Menu
       const hamburgerBtn = document.getElementById('hamburgerBtn');
       const mainMenu = document.getElementById('mainMenu');
-      
+
       if (hamburgerBtn && mainMenu) {
         hamburgerBtn.addEventListener('click', () => {
           const isOpen = mainMenu.classList.contains('open');
-          
+
           if (isOpen) {
-            // Close menu
             mainMenu.classList.remove('open');
             hamburgerBtn.classList.remove('active');
             hamburgerBtn.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
           } else {
-            // Open menu
             mainMenu.classList.add('open');
             hamburgerBtn.classList.add('active');
             hamburgerBtn.setAttribute('aria-expanded', 'true');
@@ -551,7 +627,6 @@
           }
         });
 
-        // Close menu when clicking a link
         mainMenu.querySelectorAll('a').forEach(link => {
           link.addEventListener('click', () => {
             mainMenu.classList.remove('open');
@@ -561,6 +636,54 @@
           });
         });
       }
+
+      // ---- RSVP Modal ----
+      const rsvpOverlay = document.getElementById('rsvpOverlay');
+      const rsvpClose = document.getElementById('rsvpClose');
+      const rsvpForm = document.getElementById('rsvpForm');
+      const rsvpSuccess = document.getElementById('rsvpSuccess');
+
+      const openRsvp = (e) => {
+        e.preventDefault();
+        rsvpOverlay.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeRsvp = () => {
+        rsvpOverlay.classList.remove('is-open');
+        document.body.style.overflow = '';
+      };
+
+      document.querySelectorAll('[data-rsvp]').forEach(el => el.addEventListener('click', openRsvp));
+      rsvpClose.addEventListener('click', closeRsvp);
+      rsvpOverlay.addEventListener('click', (e) => {
+        if (e.target === rsvpOverlay) closeRsvp();
+      });
+
+      // Show/hide +1 name field
+      document.querySelectorAll('input[name="Plus One"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+          document.getElementById('plusOneName').style.display = radio.value === 'Yes' ? '' : 'none';
+        });
+      });
+
+      // Handle form submit
+      rsvpForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(rsvpForm);
+        try {
+          await fetch(rsvpForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+          rsvpForm.style.display = 'none';
+          rsvpSuccess.style.display = '';
+        } catch (err) {
+          // Fallback: submit normally
+          rsvpForm.submit();
+        }
+      });
     </script>
   </body>
 </html>

@@ -216,7 +216,6 @@ h1 {
   line-height: 0.95;
   color: var(--ocean-950);
   white-space: nowrap;
-  text-wrap: balance;
 }
 
 .lead {
@@ -482,7 +481,8 @@ h3 {
 }
 
 .section-note {
-  margin-top: 14px;
+  margin-top: -12px;
+  margin-bottom: 24px;
   max-width: 72ch;
   font-size: 18px;
   line-height: 1.6;
@@ -1582,5 +1582,198 @@ h3 {
   h2 {
     font-size: 36px;
     margin-bottom: 16px;
+  }
+}
+
+/* ========== RSVP MODAL ========== */
+.rsvp-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  background: rgba(5, 32, 54, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.rsvp-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.rsvp-modal {
+  position: relative;
+  width: min(520px, calc(100% - 32px));
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: #fff;
+  border: 2px solid var(--line-strong);
+  box-shadow: 0 24px 64px rgba(5, 32, 54, 0.35);
+  padding: 36px 32px 32px;
+  transform: translateY(16px) scale(0.97);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.rsvp-overlay.is-open .rsvp-modal {
+  transform: translateY(0) scale(1);
+}
+
+.rsvp-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--line);
+  background: transparent;
+  color: var(--ocean-950);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.rsvp-close:hover {
+  background: var(--foam);
+  border-color: var(--ocean-950);
+}
+
+.rsvp-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 42px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--ocean-950);
+  margin: 0;
+}
+
+.rsvp-subtitle {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ocean-750);
+}
+
+.rsvp-form {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.rsvp-field label:first-child {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ocean-750);
+  margin-bottom: 6px;
+}
+
+.rsvp-field input[type="text"],
+.rsvp-field input[type="email"],
+.rsvp-field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid var(--line);
+  background: rgba(234, 249, 255, 0.4);
+  font-family: "Manrope", sans-serif;
+  font-size: 15px;
+  color: var(--ocean-950);
+  transition: border-color 0.15s ease;
+}
+
+.rsvp-field input:focus,
+.rsvp-field textarea:focus {
+  outline: none;
+  border-color: var(--ocean-620);
+}
+
+.rsvp-field textarea {
+  resize: vertical;
+}
+
+.rsvp-radio-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.rsvp-radio {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ocean-950);
+}
+
+.rsvp-radio input {
+  accent-color: var(--sun);
+  width: 16px;
+  height: 16px;
+}
+
+.rsvp-radio span {
+  font-size: 14px;
+}
+
+.rsvp-submit {
+  margin-top: 6px;
+  padding: 14px 28px;
+  border: 2px solid var(--ocean-950);
+  background: var(--sun);
+  color: var(--ocean-950);
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.rsvp-submit:hover {
+  background: #ff7f35;
+}
+
+.rsvp-success {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.rsvp-success-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.rsvp-success-msg {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ocean-950);
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .rsvp-modal {
+    padding: 28px 20px 24px;
+  }
+
+  .rsvp-title {
+    font-size: 34px;
+  }
+
+  .rsvp-radio-group {
+    flex-direction: column;
+    gap: 8px;
   }
 }
