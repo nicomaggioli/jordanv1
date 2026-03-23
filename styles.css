@@ -313,6 +313,10 @@ h1 {
   opacity: 1;
 }
 
+.hero-slide-7 {
+  object-position: center 20%;
+}
+
 .hero-date {
   position: absolute;
   left: 14px;
