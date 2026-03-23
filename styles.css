@@ -1933,7 +1933,7 @@ h3 {
 
 @media (max-width: 640px) {
   .rsvp-modal {
-    padding: 28px 20px 24px;
+    padding: 24px 18px 20px;
   }
 
   .rsvp-title {
@@ -1941,7 +1941,42 @@ h3 {
   }
 
   .rsvp-radio-group {
-    flex-direction: column;
-    gap: 8px;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .rsvp-checkbox-group {
+    gap: 16px;
+  }
+
+  .rsvp-field .rsvp-radio-group .rsvp-radio,
+  .rsvp-field .rsvp-checkbox-group .rsvp-checkbox {
+    font-size: 14px;
+  }
+
+  .rsvp-field .rsvp-radio-group .rsvp-radio span,
+  .rsvp-field .rsvp-checkbox-group .rsvp-checkbox span {
+    font-size: 14px;
+  }
+
+  .rsvp-form {
+    gap: 14px;
+  }
+
+  .rsvp-field > label:first-child {
+    font-size: 10px;
+    margin-bottom: 4px;
+  }
+
+  .rsvp-field input[type="text"],
+  .rsvp-field input[type="email"],
+  .rsvp-field textarea {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .rsvp-submit {
+    padding: 12px 20px;
+    font-size: 13px;
   }
 }
