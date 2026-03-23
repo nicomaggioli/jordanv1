@@ -1721,11 +1721,34 @@ h3 {
 }
 
 .rsvp-radio input {
-  accent-color: var(--sun);
-  width: 18px;
-  height: 18px;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
   margin: 0;
   flex-shrink: 0;
+  border: 2px solid var(--ocean-950);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.rsvp-radio input:checked {
+  border-color: var(--sun);
+  background: var(--sun);
+}
+
+.rsvp-radio input:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ocean-950);
 }
 
 .rsvp-radio span {
