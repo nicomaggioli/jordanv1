@@ -442,51 +442,62 @@ h3 {
   transform: none;
 }
 
-.agenda-panel {
-  padding: 10px 20px;
-}
-
-.agenda-item {
+.agenda-cards {
   display: grid;
-  grid-template-columns: 120px 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  padding: 20px 0;
 }
 
-.agenda-item + .agenda-item {
-  border-top: 2px solid var(--line);
+.agenda-card {
+  border: 2px solid var(--line-strong);
+  background: rgba(234, 249, 255, 0.3);
+  overflow: hidden;
 }
 
 .agenda-day {
   font-family: "Bebas Neue", sans-serif;
-  font-size: 28px;
+  font-size: 32px;
   letter-spacing: 0.04em;
-  color: var(--ocean-950);
-  padding: 24px 0 0;
+  color: #fff;
+  background: var(--ocean-950);
+  padding: 14px 20px;
   margin: 0;
   line-height: 1;
 }
 
-.agenda-day + .agenda-item {
-  border-top: none;
+.agenda-card-body {
+  padding: 8px 20px 20px;
 }
 
-.agenda-day:first-child {
-  padding-top: 10px;
+.agenda-item {
+  padding: 14px 0;
+}
+
+.agenda-item + .agenda-item {
+  border-top: 1px solid var(--line);
 }
 
 .agenda-time {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ocean-750);
+  color: var(--ocean-620);
+  margin-bottom: 4px;
 }
 
 .agenda-copy {
-  font-size: 19px;
-  line-height: 1.5;
-  color: #133650;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ocean-950);
+}
+
+.agenda-venue {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ocean-750);
+  margin-top: 2px;
 }
 
 .agenda-note {
@@ -1166,9 +1177,12 @@ h3 {
   .fact-label,
   .stat-label,
   .cool-label,
-  .agenda-time,
   .shore-label {
     font-size: 11px;
+  }
+
+  .agenda-cards {
+    grid-template-columns: 1fr;
   }
 }
 
