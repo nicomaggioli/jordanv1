@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jordan's 50th — Ogunquit, Maine</title>
     <link rel="icon" type="image/png" href="assets/Jordan_Logo.png" />
-    <link rel="stylesheet" href="styles.css?v=29" />
+    <link rel="stylesheet" href="styles.css?v=30" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
@@ -66,6 +66,16 @@
             <div class="rsvp-radio-group">
               <label class="rsvp-radio"><input type="radio" name="Dinner" value="Yes" required /><span>Yes</span></label>
               <label class="rsvp-radio"><input type="radio" name="Dinner" value="No" /><span>No</span></label>
+            </div>
+          </div>
+
+          <div class="rsvp-field">
+            <label>Dinner selection (pick all that apply)</label>
+            <div class="rsvp-checkbox-group">
+              <label class="rsvp-checkbox"><input type="checkbox" name="Meal" value="Lobster" /><span>Lobster</span></label>
+              <label class="rsvp-checkbox"><input type="checkbox" name="Meal" value="Steak" /><span>Steak</span></label>
+              <label class="rsvp-checkbox"><input type="checkbox" name="Meal" value="Chicken" /><span>Chicken</span></label>
+              <label class="rsvp-checkbox"><input type="checkbox" name="Meal" value="Veggie" /><span>Veggie</span></label>
             </div>
           </div>
 
@@ -717,7 +727,12 @@
         e.preventDefault();
         const formData = new FormData(rsvpForm);
         const data = {};
-        formData.forEach((val, key) => { data[key] = val; });
+        const meals = [];
+        formData.forEach((val, key) => {
+          if (key === 'Meal') { meals.push(val); }
+          else { data[key] = val; }
+        });
+        data['Meal'] = meals.join(', ');
         try {
           await fetch(rsvpForm.action, {
             method: 'POST',

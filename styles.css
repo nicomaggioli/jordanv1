@@ -1785,6 +1785,71 @@ h3 {
   background: var(--ocean-950);
 }
 
+.rsvp-checkbox-group {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.rsvp-field .rsvp-checkbox-group .rsvp-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ocean-950);
+  text-transform: none;
+  letter-spacing: 0;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.rsvp-field .rsvp-checkbox-group .rsvp-checkbox input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+  border: 2px solid var(--ocean-950);
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.rsvp-field .rsvp-checkbox-group .rsvp-checkbox input:checked {
+  border-color: var(--sun);
+  background: var(--sun);
+}
+
+.rsvp-field .rsvp-checkbox-group .rsvp-checkbox input:checked::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  width: 5px;
+  height: 10px;
+  border: solid var(--ocean-950);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.rsvp-field .rsvp-checkbox-group .rsvp-checkbox span {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ocean-950);
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
 .rsvp-submit {
   margin-top: 6px;
   padding: 14px 28px;
