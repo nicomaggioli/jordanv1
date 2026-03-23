@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jordan's 50th — Ogunquit, Maine</title>
     <link rel="icon" type="image/png" href="assets/Jordan_Logo.png" />
-    <link rel="stylesheet" href="styles.css?v=32" />
+    <link rel="stylesheet" href="styles.css?v=33" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
@@ -84,7 +84,7 @@
             <textarea id="rsvp-notes" name="Notes" rows="3" placeholder="Anything we should know?"></textarea>
           </div>
 
-          <button type="submit" class="rsvp-submit" id="rsvpSubmitBtn"><span id="rsvpBtnText">Send RSVP</span><span class="rsvp-spinner" id="rsvpSpinner"></span></button>
+          <button type="submit" class="rsvp-submit" id="rsvpSubmitBtn">Send RSVP</button>
         </form>
 
         <div class="rsvp-success" id="rsvpSuccess" style="display:none">
@@ -726,11 +726,8 @@
       rsvpForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const btn = document.getElementById('rsvpSubmitBtn');
-        const btnText = document.getElementById('rsvpBtnText');
-        const spinner = document.getElementById('rsvpSpinner');
         btn.disabled = true;
-        btnText.style.display = 'none';
-        spinner.classList.add('is-active');
+        btn.innerHTML = '<div class="rsvp-spinner"></div>';
 
         const formData = new FormData(rsvpForm);
         const data = {};
