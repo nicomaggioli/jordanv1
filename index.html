@@ -740,14 +740,14 @@
           else { data[key] = val; }
         });
         data['Meal'] = meals.join(', ');
-        try {
-          await fetch(rsvpForm.action, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-          });
-        } catch (err) {}
+        const sendPromise = fetch(rsvpForm.action, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        }).catch(() => {});
+        const delayPromise = new Promise(r => setTimeout(r, 1500));
+        await Promise.all([sendPromise, delayPromise]);
         rsvpForm.style.display = 'none';
         rsvpSuccess.style.display = '';
         fireConfetti();
