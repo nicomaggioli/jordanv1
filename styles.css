@@ -1865,6 +1865,26 @@ h3 {
   transition: background 0.15s ease;
 }
 
+.rsvp-submit:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.rsvp-spinner {
+  display: none;
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(5, 32, 54, 0.3);
+  border-top-color: var(--ocean-950);
+  border-radius: 50%;
+  animation: rsvp-spin 0.6s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes rsvp-spin {
+  to { transform: rotate(360deg); }
+}
+
 .rsvp-submit:hover {
   background: #ff7f35;
 }

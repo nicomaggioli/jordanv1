@@ -84,7 +84,7 @@
             <textarea id="rsvp-notes" name="Notes" rows="3" placeholder="Anything we should know?"></textarea>
           </div>
 
-          <button type="submit" class="rsvp-submit">Send RSVP</button>
+          <button type="submit" class="rsvp-submit" id="rsvpSubmitBtn"><span id="rsvpBtnText">Send RSVP</span><span class="rsvp-spinner" id="rsvpSpinner"></span></button>
         </form>
 
         <div class="rsvp-success" id="rsvpSuccess" style="display:none">
@@ -725,6 +725,13 @@
       // Handle form submit
       rsvpForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        const btn = document.getElementById('rsvpSubmitBtn');
+        const btnText = document.getElementById('rsvpBtnText');
+        const spinner = document.getElementById('rsvpSpinner');
+        btn.disabled = true;
+        btnText.style.display = 'none';
+        spinner.style.display = 'inline-block';
+
         const formData = new FormData(rsvpForm);
         const data = {};
         const meals = [];
@@ -740,14 +747,10 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
           });
-          rsvpForm.style.display = 'none';
-          rsvpSuccess.style.display = '';
-          fireConfetti();
-        } catch (err) {
-          rsvpForm.style.display = 'none';
-          rsvpSuccess.style.display = '';
-          fireConfetti();
-        }
+        } catch (err) {}
+        rsvpForm.style.display = 'none';
+        rsvpSuccess.style.display = '';
+        fireConfetti();
       });
     </script>
   </body>
