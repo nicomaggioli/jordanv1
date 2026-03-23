@@ -28,11 +28,7 @@
         <h3 class="rsvp-title">RSVP</h3>
         <p class="rsvp-subtitle">Jordan's 50th — June 13, 2026</p>
 
-        <form class="rsvp-form" id="rsvpForm" action="https://formsubmit.co/nicomaggioli@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="Jordan's 50th RSVP" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="text" name="_honey" style="display:none" />
+        <form class="rsvp-form" id="rsvpForm" action="https://script.google.com/macros/s/AKfycbyJCJx-ed-MsVbGgwEwlLgebvKydVTub0NYUuY6mM8Q1ySP2D5F5v6xqtD5zMEL441I8Q/exec" method="POST">
 
           <div class="rsvp-field">
             <label for="rsvp-name">Your Name</label>
@@ -702,18 +698,22 @@
       rsvpForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(rsvpForm);
+        const data = {};
+        formData.forEach((val, key) => { data[key] = val; });
         try {
           await fetch(rsvpForm.action, {
             method: 'POST',
-            body: formData,
-            headers: { 'Accept': 'application/json' }
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
           });
           rsvpForm.style.display = 'none';
           rsvpSuccess.style.display = '';
           fireConfetti();
         } catch (err) {
-          // Fallback: submit normally
-          rsvpForm.submit();
+          rsvpForm.style.display = 'none';
+          rsvpSuccess.style.display = '';
+          fireConfetti();
         }
       });
     </script>
