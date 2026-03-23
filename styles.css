@@ -1703,8 +1703,9 @@ h3 {
 
 .rsvp-radio-group {
   display: flex;
-  gap: 12px;
+  gap: 20px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .rsvp-radio {
@@ -1714,18 +1715,25 @@ h3 {
   cursor: pointer;
   font-size: 15px;
   font-weight: 600;
-  color: var(--ocean-700, #1178a1);
+  color: var(--ocean-950);
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .rsvp-radio input {
   accent-color: var(--sun);
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  flex-shrink: 0;
 }
 
 .rsvp-radio span {
   font-size: 15px;
-  color: inherit;
+  font-weight: 600;
+  color: var(--ocean-950);
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .rsvp-submit {
