@@ -47,7 +47,7 @@
           <div class="rsvp-field">
             <label>Will you be attending?</label>
             <div class="rsvp-radio-group">
-              <label class="rsvp-radio"><input type="radio" name="Attending" value="Yes" required /><span>Yes, I'll be there!</span></label>
+              <label class="rsvp-radio"><input type="radio" name="Attending" value="Yes" required /><span>Yes, I'll be there</span></label>
               <label class="rsvp-radio"><input type="radio" name="Attending" value="No" /><span>Sorry, can't make it</span></label>
             </div>
           </div>
@@ -82,7 +82,7 @@
         </form>
 
         <div class="rsvp-success" id="rsvpSuccess" style="display:none">
-          <p class="rsvp-success-icon">&#127881;</p>
+          <canvas id="confettiCanvas"></canvas>
           <p class="rsvp-success-msg">You're all set! We'll see you in Ogunquit.</p>
         </div>
       </div>
@@ -646,6 +646,58 @@
         });
       });
 
+      // Confetti burst
+      const fireConfetti = () => {
+        const canvas = document.getElementById('confettiCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const modal = canvas.closest('.rsvp-modal');
+        canvas.width = modal.offsetWidth;
+        canvas.height = modal.offsetHeight;
+
+        const colors = ['#ff9152', '#f7c948', '#1178a1', '#27a7ce', '#7b68c4', '#e87da0', '#4ad1cf', '#ff7f35'];
+        const pieces = [];
+        for (let i = 0; i < 120; i++) {
+          pieces.push({
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            vx: (Math.random() - 0.5) * 16,
+            vy: (Math.random() - 1) * 14 - 2,
+            w: Math.random() * 8 + 4,
+            h: Math.random() * 6 + 2,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            rot: Math.random() * 360,
+            rv: (Math.random() - 0.5) * 12,
+            gravity: 0.25 + Math.random() * 0.15,
+            opacity: 1
+          });
+        }
+
+        const animate = () => {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          let alive = false;
+          pieces.forEach(p => {
+            p.vy += p.gravity;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.rot += p.rv;
+            p.vx *= 0.98;
+            if (p.y > canvas.height - 10) p.opacity -= 0.02;
+            if (p.opacity <= 0) return;
+            alive = true;
+            ctx.save();
+            ctx.globalAlpha = Math.max(0, p.opacity);
+            ctx.translate(p.x, p.y);
+            ctx.rotate((p.rot * Math.PI) / 180);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            ctx.restore();
+          });
+          if (alive) requestAnimationFrame(animate);
+        };
+        requestAnimationFrame(animate);
+      };
+
       // Handle form submit
       rsvpForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -658,6 +710,7 @@
           });
           rsvpForm.style.display = 'none';
           rsvpSuccess.style.display = '';
+          fireConfetti();
         } catch (err) {
           // Fallback: submit normally
           rsvpForm.submit();
