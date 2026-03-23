@@ -1319,8 +1319,7 @@ h3 {
     background: rgba(234, 249, 255, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: none;
-    border-bottom: 2px solid var(--line);
+    border: 2px solid var(--line-strong);
   }
 
   /* Fullscreen menu overlay */
