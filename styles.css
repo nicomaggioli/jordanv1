@@ -313,8 +313,10 @@ h1 {
   opacity: 1;
 }
 
-.hero-slide-7 {
-  object-position: center 20%;
+@media (max-width: 768px) {
+  .hero-slide-7 {
+    object-position: center 20%;
+  }
 }
 
 .hero-date {
