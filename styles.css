@@ -198,6 +198,7 @@ p {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 0.92fr);
   gap: 38px;
+  align-items: start;
 }
 
 .kicker {
