@@ -457,6 +457,24 @@ h3 {
   border-top: 2px solid var(--line);
 }
 
+.agenda-day {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  color: var(--ocean-950);
+  padding: 24px 0 0;
+  margin: 0;
+  line-height: 1;
+}
+
+.agenda-day + .agenda-item {
+  border-top: none;
+}
+
+.agenda-day:first-child {
+  padding-top: 10px;
+}
+
 .agenda-time {
   font-size: 12px;
   font-weight: 800;
