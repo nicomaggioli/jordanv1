@@ -1863,6 +1863,10 @@ h3 {
   letter-spacing: 0.08em;
   cursor: pointer;
   transition: background 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
 }
 
 .rsvp-submit:disabled {
@@ -1870,15 +1874,18 @@ h3 {
   cursor: wait;
 }
 
-.rsvp-spinner {
+.rsvp-submit .rsvp-spinner {
   display: none;
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   border: 3px solid rgba(5, 32, 54, 0.3);
   border-top-color: var(--ocean-950);
   border-radius: 50%;
   animation: rsvp-spin 0.6s linear infinite;
-  vertical-align: middle;
+}
+
+.rsvp-submit .rsvp-spinner.is-active {
+  display: block;
 }
 
 @keyframes rsvp-spin {
