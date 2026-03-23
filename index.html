@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jordan's 50th — Ogunquit, Maine</title>
     <link rel="icon" type="image/png" href="assets/Jordan_Logo.png" />
-    <link rel="stylesheet" href="styles.css?v=36" />
+    <link rel="stylesheet" href="styles.css?v=37" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
@@ -683,12 +683,10 @@
             mainMenu.classList.remove('open');
             hamburgerBtn.classList.remove('active');
             hamburgerBtn.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
           } else {
             mainMenu.classList.add('open');
             hamburgerBtn.classList.add('active');
             hamburgerBtn.setAttribute('aria-expanded', 'true');
-            document.body.style.overflow = 'hidden';
           }
         });
 
@@ -697,7 +695,6 @@
             mainMenu.classList.remove('open');
             hamburgerBtn.classList.remove('active');
             hamburgerBtn.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
           });
         });
       }
